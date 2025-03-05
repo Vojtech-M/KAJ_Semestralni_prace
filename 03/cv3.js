@@ -49,6 +49,10 @@ class State {
         // 3. Arrow functions
         // 
         return this.#todos.filter((todo) => {
+            
+            console.log(this);
+
+
             if (this.#filter === 'all') {
                 return true;
             } else if (this.#filter === 'completed') {
@@ -59,6 +63,9 @@ class State {
         });
     }
 }
+
+console.log("test")
+
 
 const state = new State(initialState.todos, initialState.filter);
 const todoListEl = document.querySelector('.todo-list');
@@ -133,18 +140,34 @@ let {c,d} = {c: "podle", d: "klice"}
  */
 
 function filtersClick (newFilterType) {
+    
+    // přepsání for in na for of
+
+    for (const filterEl in Object.values(filters)){
+        filterEL.classList.remove("selected");
+    }
+    
+    // Add 'selected' class to clicked filter button
+    filters[newFilterType].classList.add('selected');
+
+    // Update state
+    state.setFilter(newFilterType);
+
+    // Render todos view
+    createHtmlWithCreateElement(state.getTodos(), todoListEl);
+
+        
     // Another approach to rendering the view, manually update html
     // nodes that need to be updated instead of rerendering the whole
     // part of the UI, as we did in createHtmlWithStrings or in
     // createHtmlWithCreateElement functions.
 
-    //
-    // 4. `for of` loop
-    // 5. destructuring
-    //
     // Remove 'selected' class on all filter buttons
-    for (const filterEl of Object.values(filters)) {
-        filterEl.classList.remove('selected');
+   /*  for (var key in filters) {
+        if (filters.hasOwnProperty(key)) {
+            var filter = filters[key];
+            filter.classList.remove('selected');
+        }
     }
 
     // Add 'selected' class to clicked filter button
@@ -154,10 +177,5 @@ function filtersClick (newFilterType) {
     state.setFilter(newFilterType);
 
     // Render todos view
-    createHtmlWithCreateElement(state.getTodos(), todoListEl);
+    createHtmlWithCreateElement(state.getTodos(), todoListEl); */
 }
-
-// EXERCISES: Finish remaining features:
-//      1. Remove todo button
-//      2. Checking/Unchecking of todo
-//      3. Clear completed button
