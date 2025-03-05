@@ -31,6 +31,7 @@ class State {
     #filter;
 
     constructor(initialTodos, initialFilter) {
+        // # privátní vlastnoti
         this.#todos = initialTodos;
         this.#filter = initialFilter;
     }
@@ -95,11 +96,41 @@ const filters = {
 // 4. `for of` loop
 // 5. destructuring
 //
+
+//
+//for (let value of Object.keys(filters)){
+//    console.log(value)
+//}
+
 for (const [filterName, filterEl] of Object.entries(filters)) {
     filterEl.addEventListener('click', () => {
         filtersClick(filterName);
     });
 }
+/* 
+
+for (let [filterName, filterEL]of Object.keys(filters)){
+    console.log(value)
+    // entries je pole 
+    let [filterName,filterEL] = value;
+
+    filter.addEventListener("click", funciton({
+        filtersClick([filterName, filterEl]);
+    }
+    ))
+
+
+    console.log(filterName, filterEl)
+}
+
+// destrukturalizace
+let [a,b] = ["podle","indexu"]
+console.log(a)
+
+// v objektu je potřeba mít {} závorky
+let {c,d} = {c: "podle", d: "klice"}
+
+ */
 
 function filtersClick (newFilterType) {
     // Another approach to rendering the view, manually update html

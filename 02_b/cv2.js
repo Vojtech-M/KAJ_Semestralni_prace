@@ -116,17 +116,61 @@ var filters = {
 // to musíme ošetřit
 // nejdřív se snaží najít vlastnoti k tomu a až nakonec ty prototypy.
 
+Object.prototype.addTimestamp = function(){
+this.timestamp = Date.now();
+
+}
+
+
 
 for (var filterName in filters) {
     console.log("this is filter:" + filterName)
 
+
+    // ty listnery dáme jan na tlačítka, která mají vlastní property
+    // když to má, tak na něj dáme listenery
     if (filters.hasOwnProperty(filterName)) {
         var filterEl = filters[filterName];
+        
+        
+        // toto je IIFE
+       // (function(capcutredFilterName){
+        //    filterEl.addEventListener("click", function(e){
+         //       console.log(capcutredFilterName);
+          //  });
+       // })(filterName);
 
-        filterEl.addEventListener("click", function(e){
-            console.log(filterName);
-        });
-    
+        (function(capcutredFilterName){
+            filterEl.addEventListener("click", function(e){
+                filtersClick(capcutredFilterName)
+            
+            });
+        })(filterName);
+    }
+
+// tady přidávám selected class
+// hasOwnproperty, je to je vlasní a ne zděděná. 
+    function filtersClick(newFilterType){
+        
+        // všem smažeme classu selected
+        for (var key in filters) {
+            if (filters.hasOwnProperty(key)){
+                var filter = filters[key];
+                filters.classList.remove["selected"]
+
+                // Kdyby se použilo className = "selected"
+
+            }
+
+        }
+
+        // Přidat jenom na element, který chceme
+        filters[newFilterType].classList.add("selected");
+
+        state.setFilter(newFilterType);
+
+        createHtmlWithStrings(state.getTodos(),todoListEl);
+
 
 
     }
