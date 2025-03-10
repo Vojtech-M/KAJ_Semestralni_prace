@@ -5,9 +5,7 @@ body {
     height: 100vh;
     background-color: #222;
 }
-canvas {
-    border: 2px solid white;
-}
+
 
 header {
     position: fixed;
