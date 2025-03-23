@@ -1,17 +1,56 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 let tileMap;
-const tileImage = new Image();
-tileImage.src = "./assets/img/tower.png";
+const towerImage = new Image();
+const targetImgae = new Image();
+towerImage.src = "./assets/img/tower.png";
+targetImgae.src = "./assets/img/target.png";
 
+
+class Tower {
+    constructor(x, y, tileSize) {
+        this.x = x;
+        this.y = y;
+        this.tileSize = tileSize;
+        this.range = 100;
+        this.damage = 10;
+        this.lastShotTime = 0; 
+        this.shootCooldown = 2000; // <- 2 seconds in ms
+    }
+
+    draw(ctx) {
+        ctx.drawImage(towerImage, this.x, this.y, this.tileSize, this.tileSize);
+    }
+
+    shoot(currentTime) {
+        if (currentTime - this.lastShotTime >= this.shootCooldown) {
+            if (enemy) {
+                const dx = enemy.x - this.x;
+                const dy = enemy.y - this.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance <= this.range) {
+                    console.log("Enemy hit!");
+                    ctx.drawImage(targetImgae, this.x, this.y, this.tileSize, this.tileSize);
+                    enemy.health -= this.damage;
+                    this.lastShotTime = currentTime; // Update shot time
+
+                    if (enemy.health <= 0) {
+                        enemy = null;
+                    }
+                }
+            }
+        }
+    }
+}
 
 
 class TileMap {
-
     constructor(ctx, tileSize) {
         this.ctx = ctx;
         this.tileSize = tileSize;
         this.map = [];
+        this.towers = []; // Store tower instances
     }
 
     loadFromArray(array2D) {
@@ -30,9 +69,7 @@ class TileMap {
                 const x = col * this.tileSize;
                 const y = row * this.tileSize;
 
-                if (tile === 1) {
-                    this.ctx.drawImage(tileImage, x, y, this.tileSize, this.tileSize);
-                } else if (tile === 2) {
+                if (tile === 2) {
                     this.ctx.fillStyle = "black";
                     this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
                 } else if (tile === 3) {
@@ -41,13 +78,26 @@ class TileMap {
                 } else if (tile === 4) {
                     this.ctx.fillStyle = "blue";
                     this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
-                }
-                else {
-                    // Optional: clear other tiles
+                } else {
                     this.ctx.clearRect(x, y, this.tileSize, this.tileSize);
                 }
             }
         }
+
+        // Draw towers after base tiles
+        this.towers.forEach(tower => tower.draw(this.ctx));
+    }
+
+    addTower(row, col) {
+        const x = col * this.tileSize;
+        const y = row * this.tileSize;
+        this.towers.push(new Tower(x, y, this.tileSize));
+    }
+
+    removeTower(row, col) {
+        const x = col * this.tileSize;
+        const y = row * this.tileSize;
+        this.towers = this.towers.filter(t => !(t.x === x && t.y === y));
     }
 }
 
@@ -119,8 +169,6 @@ class Enemy {
         ctx.fillRect(this.x, this.y, this.tileSize, this.tileSize);
     }
 }
-
-
 canvas.addEventListener("click", function(event) {
     if (!tileMap) return;
 
@@ -131,26 +179,24 @@ canvas.addEventListener("click", function(event) {
     const col = Math.floor(x / 64);
     const row = Math.floor(y / 64);
 
-    console.log(`Clicked on row ${row}, col ${col}`);
-
-    // Safety check
     if (row >= 0 && row < tileMap.map.length && col >= 0 && col < tileMap.map[row].length) {
         if (tileMap.map[row][col] === 1) {
             tileMap.map[row][col] = 0;
+            tileMap.removeTower(row, col);
             money += 5;
         } else if (tileMap.map[row][col] === 0) {
-            if (money >= 10){
+            if (money >= 10) {
                 tileMap.map[row][col] = 1;
+                tileMap.addTower(row, col);
                 money -= 10;
             }
-           
         } else {
-            // tower can't be placed here
             console.log("Invalid tile");
         }
         tileMap.draw();
     }
 });
+
 
 let startTime = null;
 let elapsedTime = 0;
@@ -198,6 +244,9 @@ function gameLoop(timestamp) {
     // Draw updated timer
     drawTimer();
     drawMoney();
+    // Shoot at enemy
+    tileMap.towers.forEach(tower => tower.shoot(timestamp));
+
     requestAnimationFrame(gameLoop);
 }
 
