@@ -3,6 +3,9 @@ const ctx = canvas.getContext("2d");
 let tileMap;
 const tileImage = new Image();
 tileImage.src = "./assets/img/tower.png";
+
+
+
 class TileMap {
 
     constructor(ctx, tileSize) {
@@ -134,8 +137,13 @@ canvas.addEventListener("click", function(event) {
     if (row >= 0 && row < tileMap.map.length && col >= 0 && col < tileMap.map[row].length) {
         if (tileMap.map[row][col] === 1) {
             tileMap.map[row][col] = 0;
+            money += 5;
         } else if (tileMap.map[row][col] === 0) {
-            tileMap.map[row][col] = 1;
+            if (money >= 10){
+                tileMap.map[row][col] = 1;
+                money -= 10;
+            }
+           
         } else {
             // tower can't be placed here
             console.log("Invalid tile");
@@ -147,6 +155,8 @@ canvas.addEventListener("click", function(event) {
 let startTime = null;
 let elapsedTime = 0;
 let enemy = null;
+// Money at start of game
+let money = 100;
 
 
 function drawTimer() {
@@ -157,6 +167,13 @@ function drawTimer() {
     let minutes = Math.floor(elapsedTime / 60);
     ctx.fillText(`Time: ${minutes}:${String(seconds).padStart(2, "0")}`, 630, 30);
 }
+function drawMoney() {
+    ctx.fillStyle = "white";
+    ctx.font = "24px Arial";
+    ctx.fillText(`Money: ${money}`, 500, 60);
+}
+
+
 
 function gameLoop(timestamp) {
     if (!startTime) startTime = timestamp;
@@ -180,6 +197,7 @@ function gameLoop(timestamp) {
     }
     // Draw updated timer
     drawTimer();
+    drawMoney();
     requestAnimationFrame(gameLoop);
 }
 
@@ -190,6 +208,7 @@ fetch("./assets/levels/map.txt")
         tileMap = new TileMap(ctx, 64);
         tileMap.loadFromText(text);
         tileMap.draw();
+
         for (let row = 0; row < tileMap.map.length; row++) {
             for (let col = 0; col < tileMap.map[row].length; col++) {
                 if (tileMap.map[row][col] === 3) {
