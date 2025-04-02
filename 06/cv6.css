@@ -1,0 +1,121 @@
+#menu ul {
+    margin: 0;
+    padding: 0;
+
+}
+
+#menu li {
+    display: inline-block;
+    list-style-type: none;
+    background-color: dodgerblue;
+    padding: 10px 20px;
+}
+
+#menu a {
+    text-decoration: none;
+    color: #121212;
+
+}
+
+#menu-control{
+    color: white;
+    background-color: rgb(12, 1, 37);
+    padding: 10px 20px;
+    margin: 20px;
+    cursor: pointer;
+    display: none;
+}
+
+#menu-control:hover {
+    background-color: rgb(43, 17, 104);
+    color: orange;
+}
+
+
+
+#menu-control + input {
+    display: none;
+}
+
+#menu-control-input:checked + #menu {
+    display: block;
+}
+
+
+
+#menu a::after{
+    content: " " attr(data-state);
+    color: red;
+}
+
+/* Jde to použít taky even, odd, nějakej jinej n mat. výraz */
+#menu li:nth-child(2n){
+    background-color: rgb(49, 65, 188);
+}
+
+#custom-checkbox-input {
+    display: none;
+}
+
+
+#custom-checkbox {
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: rgb(12, 1, 37);
+    border-radius: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+#custom-checkbox::before {
+    display: block;
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: red;
+    left: 0;
+    position: relative;
+    transition: all 0.5s ease;
+}
+#custom-checkbox-input:checked + #custom-checkbox::before {
+    background-color: green;
+    left: 100%;
+
+    transform: translateX(-100%);
+}
+
+
+
+
+
+@media all and (max-width: 600px) {
+    #menu {
+        display: none;
+    }
+
+    #menu-control {
+        display: inline-block;
+    }
+
+    #menu li {
+        display: block;
+        text-align: center;
+        background-color: rgb(12, 1, 37);
+        padding: 10px 0;
+    }
+
+    #menu a {
+        color: white;
+    }
+    #menu li a::before {
+        color: orange;
+        content: counter(item) ")";
+        counter-increment: item;
+        width: 100%;
+        height: 100%;
+
+    }
+
+
+}

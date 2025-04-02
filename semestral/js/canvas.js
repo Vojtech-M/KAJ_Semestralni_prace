@@ -83,9 +83,6 @@ canvas.addEventListener("click", function(event) {
 
 //přidat se Weather API 
 
-
-
-
 class Enemy{
 
     constructor(ctx, x, y, speed){
