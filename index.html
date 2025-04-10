@@ -18,9 +18,38 @@
         <h1 id="svatek">Načítání svátku...</h1>
     </header>
  
+<article>
+    <h2>O hře</h2>
+    <p>Tato hra je semestrální práce pro předmět KAJ. Hráč se snaží ubránit svou základnu před vlnami nepřátel pomocí různých typů věží.</p>
+    <p>Hra je napsána v JavaScriptu a využívá HTML5 canvas pro vykreslování grafiky.</p>
+    <p>Hra je inspirována klasickými tower defense hrami, jako je Bloons Tower Defense nebo Kingdom Rush.</p>
+    <p>Hra obsahuje různé typy věží, které mají různé schopnosti a vlastnosti. Hráč si může vybrat, jaké věže chce postavit a kam je umístit.</p>
+</article>
+
+<audio controls autoplay>
+    <source src="/assets/audio/swimming-swing.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+  </audio>
+
+  <form id="form" action="index.html" method="get">
+    <label for="name">Zadejte své jméno:</label>
+    <input type="text" id="name" name="name" required>
+    <input type="submit" value="Odeslat">
+</form>
+
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <canvas id="gameCanvas" width="768" height="512"></canvas>
+    <section id="game">
+  
+
+    <div id="hud">
+        <p id="timer">Time: 0:00</p>
+        <p id="money">Money: $0</p>
+      
+      </div>
+      <canvas id="gameCanvas" width="768" height="512"></canvas>
+    </section>
+    
     <footer>
         <p>&copy; 2021 Vojtěch Michal</p>
     </footer>

@@ -6,7 +6,6 @@ body {
 }
 
 header {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -20,9 +19,9 @@ header {
 
 canvas {
     display: block;
-    margin: 30% auto 60px auto;
     border: 2px solid white;
     background-color: #333;
+    margin: 50px 0;
 }
 
 footer {
@@ -36,4 +35,26 @@ footer {
     padding: 10px;
     font-size: 0.8em;
     z-index: 10;
+}
+
+#hud {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    border: 2px solid white;
+    background-color: #333;
+    margin: 20px;
+    width: 200px;         /* Fixed width */
+    height: 300px;
+
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
 }
