@@ -64,7 +64,6 @@ function spawnEnemy() {
 
 
 
-
 class Tower {
     constructor(x, y, tileSize) {
         this.x = x;
