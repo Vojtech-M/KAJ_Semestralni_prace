@@ -1,9 +1,12 @@
 body {
     margin: 0;
-    padding: 0;
-    --backhround-color: #222;
-    background-color: var(--backhround-color);
+    box-sizing: border-box;
     font-family: 'Courier New', Courier, monospace;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    font-family: inherit;
 }
 
 
@@ -12,7 +15,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px;
+    padding: 5px;
     background-color: #222;
     color: white;
     text-align: center;
@@ -26,6 +29,35 @@ canvas {
     background-color: #333;
     margin: 50px 0;
 }
+
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    overflow: auto;
+    backdrop-filter: blur(5px) grayscale(0.5);
+
+}
+.modal-content {
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+}
+
+
+
+
 
 footer {
     position: fixed;
@@ -61,3 +93,68 @@ footer {
     justify-content: center;
     gap: 0;
 }
+        
+
+ 
+      
+        /* Side menu  menu jsme dali uplně doprava pak jsme to posunili*/
+
+        .menu {
+            position: fixed;
+            left: 100%;
+            top: 0;
+            height: 100%;
+            width: 200px;
+            transition: transform 0.5s ease-out;
+            background-color: aqua;
+        }
+
+         /* v transformacích se ty procenta vzathují k tomu prvku */
+        body.menu-visible .menu  {
+            transform: translateX(-100%);
+           
+
+        }
+
+        /* Modal */
+
+        body.modal-visible .page-wrapper {
+
+            /*  filter: blur(5px) grayscale(0.5);
+            transition: filter 0.5s ease-out; */
+        }
+
+    
+        .modal {
+            visibility: visable;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            padding : 16px;
+            box-sizing: border-box;
+            overflow: auto;
+
+            backdrop-filter: blur(5px) grayscale(0.5);
+            transition: backdrop-filter 4s ease-out;
+        }
+        body.modal-visible .modal {
+            visibility: hidden;
+        }
+
+        .modal-content {
+            width: 400px;
+            background-color: dodgerblue;
+            min-height: 500px;
+            padding: 16px;
+        }
+        body.modal-visible .modal-content {
+            background: rgb(186, 2, 2);
+
+
+        }

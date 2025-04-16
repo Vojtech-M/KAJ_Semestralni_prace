@@ -1,4 +1,4 @@
-import { updateTimer, updateMoney } from "./uiElements.js";
+import { updateTimer, updateMoney, updateLives } from "./uiElements.js";
 import { Enemy } from "./enemy.js";
 
 const canvas = document.getElementById("gameCanvas");
@@ -14,6 +14,10 @@ let startTime = null;
 let elapsedTime = 0;
 let enemies = [];
 let money = 100;
+let lives = 10; // Initialize lives
+
+let enemySpawnStarted = false;
+let enemySpawnInterval = null;
 
 function gameLoop(timestamp) {
     if (!startTime) startTime = timestamp;
@@ -37,14 +41,50 @@ function gameLoop(timestamp) {
     });
     updateTimer(elapsedTime);
     updateMoney(money);
+    updateLives(lives); // Update lives displayq
     // Shoot at enemy
     tileMap.towers.forEach(tower => tower.shoot(timestamp));
 
+    if (!enemySpawnStarted) {
+        enemySpawnStarted = true;
+
+        
+        enemySpawnInterval = setInterval(spawnEnemy, 3000);
+        setTimeout(() => {
+            clearInterval(enemySpawnInterval);
+            console.log("Enemy spawning stopped after 60 seconds");
+        }, 10000);
+    }
    
     requestAnimationFrame(gameLoop);
 }
 
-loadMap();
+let Level1 = "./assets/levels/map.txt"
+let Level2 = "./assets/levels/map2.txt"
+let Level3 = "./assets/levels/map3.txt"
+
+
+function waveOfEnemies() {
+    enemySpawnInterval = setInterval(spawnEnemy, 3000);
+        setTimeout(() => {
+            clearInterval(enemySpawnInterval);
+            console.log("Enemy spawning stopped after 60 seconds");
+        }, 10000);
+    }   
+
+const startButton = document.getElementById("startButton");
+
+startButton.addEventListener("click", function () {
+    loadMap(Level1);
+});
+const level2 = document.getElementById("level2");
+
+level2.addEventListener("click", function () {
+    loadMap(Level2);
+});
+
+
+
 
 
 function spawnEnemy() {
@@ -52,7 +92,7 @@ function spawnEnemy() {
         for (let col = 0; col < tileMap.map[row].length; col++) {
             if (tileMap.map[row][col] === 3) { // Starting point tile
                 const enemy = new Enemy(col * 64, row * 64, 64, tileMap);
-                enemy.health = 30 + Math.random() * 20; // Optional: randomize health
+                enemy.health = 30 + Math.random() * 20;
                 enemies.push(enemy);
                 return;
             }
@@ -69,7 +109,7 @@ class Tower {
         this.x = x;
         this.y = y;
         this.tileSize = tileSize;
-        this.range = 100;
+        this.range = 200;
         this.damage = 10;
         this.lastShotTime = 0; 
         this.shootCooldown = 2000; // <- 2 seconds in ms
@@ -84,6 +124,7 @@ class Tower {
             // Find nearest enemy in range
             let target = null;
             let minDist = Infinity;
+
     
             enemies.forEach(e => {
                 const dx = e.x - this.x;
@@ -97,12 +138,19 @@ class Tower {
     
             if (target) {
                 console.log("Enemy hit!");
+                const hitSound = new Audio("./assets/audio/hit.wav");
+                hitSound.play();
+
                 ctx.drawImage(targetImgae, this.x, this.y, this.tileSize, this.tileSize);
                 target.health -= this.damage;
                 this.lastShotTime = currentTime;
+
+               
     
                 if (target.health <= 0) {
+                    money += 5; // Deduct money for each shot
                     enemies = enemies.filter(e => e !== target);
+                    
                 }
             }
         }
@@ -195,21 +243,25 @@ canvas.addEventListener("click", function(event) {
         tileMap.draw();
     }
 });
-
-
-function loadMap() {
+function loadMap(levelURL) {
 // Start the loop after map is loaded
-fetch("./assets/levels/map.txt")
+fetch(levelURL)
     .then(res => res.text())
     .then(text => {
         tileMap = new TileMap(ctx, 64);
         tileMap.loadFromText(text);
         tileMap.draw();
-        setInterval(spawnEnemy, 3000);
+    
+        requestAnimationFrame(gameLoop); // Start the game loop
 
         // Start the game loop
-        requestAnimationFrame(gameLoop);
 
     })
     .catch(err => console.error("Failed to load map:", err));
 }
+
+
+const waveOfEnemiesButton = document.getElementById("nextWaveButton");
+waveOfEnemiesButton.addEventListener("click", function () {
+    waveOfEnemies();
+});
