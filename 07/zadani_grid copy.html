@@ -38,6 +38,11 @@
                 grid-template-columns: 1fr 2fr 75px minmax(75px, 10%);
                 grid-gap: 10px 5px;
                 height: 100vh;
+
+                grid-template-areas:
+                    "head head head head"
+                    "navi arti as1 as2"
+                    "foot foot foot ...";
             }
             .box {
                 display: grid;
@@ -47,15 +52,29 @@
                 border-radius: 10px;
             }
             header.box {
-                grid-column: 1/ last-column;
-            
+                grid-area: head;
+        
             }
             footer.box {
-                grid-column: 2/ last-column;
+                grid-area: foot;
+            
             }
             nav.box {
-                grid-row: 2/last-column;
+                grid-area: navi;
+            
             }
+            article.box {
+                grid-area: arti;
+            
+            }
+            aside#a1 {
+                grid-area: as1;
+            }
+            aside#a2 {
+                grid-area: as2;
+            }
+
+
         </style>
     </head>
     <body>
