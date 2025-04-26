@@ -1,0 +1,70 @@
+export function updateTimer(elapsedTime) {
+    const timerElement = document.getElementById("timer");
+    let seconds = elapsedTime % 60;
+    let minutes = Math.floor(elapsedTime / 60);
+    timerElement.textContent = `Time: ${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
+export function updateMoney(money) {
+    const moneyElement = document.getElementById("money");
+    moneyElement.textContent = `Money: $${money}`;
+}
+export function updateLives(lives) {
+    const livesElement = document.getElementById("lives");
+    livesElement.textContent = `Lives: ${lives}`;
+}
+
+ let modalVisible = false;
+ const modalButtons = document.querySelectorAll('.modal-button');
+ const pageWrapper = document.querySelectorAll('.page-wrapper');
+ const modal = document.querySelector('.modal');
+ 
+
+    // const modal = document.querySelector('.modal');
+
+
+ for (let i = 0; i < modalButtons.length; i++) {
+     modalButtons[i].addEventListener('click', toggleModalState)
+ }
+
+ export function toggleModalState () {
+    document.body.classList.toggle('modal-visible');
+ }
+
+ 
+
+
+   // Menu logic
+
+        const menuButton = document.querySelector('.menu-button');
+        menuButton.addEventListener('click', toggleMenuState)
+
+        //namísto add a remove je toggle
+        // druhý atribut u toggle true, tak se ta řída vždycky jenom přidá, false se vždycky ubere
+        // namísto false tak aby tam bylo nějaká matematická oeprace
+        function toggleMenuState () {
+                document.body.classList.toggle('menu-visible');
+
+        }
+
+     
+    
+        const musicCheckbox = document.querySelector("#custom-checkbox-input");
+        const musicVolume = document.querySelector("#musicVolume");
+        let audio = new Audio("./assets/audio/swimming-swing.mp3");
+        audio.loop = true; // Make sure it loops
+        audio.volume = musicVolume.value / 100;
+        
+        musicCheckbox.addEventListener("change", function() {
+            if (musicCheckbox.checked) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+
+// Update volume live when moving the range slider
+musicVolume.addEventListener("input", function() {
+    audio.volume = musicVolume.value / 100;
+});
+        

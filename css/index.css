@@ -1,0 +1,240 @@
+body {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Make the body fill the entire viewport */
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+    font-family: inherit;
+}
+
+header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px;
+    background-color: #222;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    z-index: 10;
+}
+
+canvas {
+    display: block;
+    border: 2px solid white;
+    background-color: #333;
+    margin: 10px 0;
+}
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    overflow: auto;
+    backdrop-filter: blur(5px) grayscale(0.5);
+}
+
+.modal-content {
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    width: 100%;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    gap: 10px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8em;
+    z-index: 10;
+}
+
+.hud {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+    font-size: 1.2em;
+    border: 2px solid white;
+    background-color: #333;
+    margin: 20px;
+    width: 200px;
+    height: 400px;
+}
+
+.hud button ~ p {
+    font-size: 1.1em;
+    color: yellow;
+    text-align: center;
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    background-color: red;
+    flex-grow: 1; /* Allow the game to take the available space */
+    padding: 5% 0; /* Add vertical padding to match space between header and footer */
+}
+
+.menu {
+    position: fixed;
+    left: 100%;
+    top: 0;
+    height: 100%;
+    width: 200px;
+    transition: transform 0.5s ease-out;
+    background-color: aqua;
+}
+
+body.menu-visible .menu {
+    transform: translateX(-100%);
+}
+
+body.modal-visible .page-wrapper {}
+
+.modal {
+    visibility: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    overflow: auto;
+    backdrop-filter: blur(5px) grayscale(0.5);
+    transition: backdrop-filter 4s ease-out;
+    -moz-transition: backdrop-filter 4s ease-out;
+}
+
+body.modal-visible .modal {
+    visibility: hidden;
+}
+
+.modal-content {
+    width: 400px;
+    background-color: dodgerblue;
+    min-height: 500px;
+    padding: 16px;
+}
+
+body.modal-visible .modal-content {
+    background: rgb(186, 2, 2);
+}
+
+#custom-checkbox {
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: rgb(12, 1, 37);
+    border-radius: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#custom-checkbox::before {
+    display: block;
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: red;
+    left: 0;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+#custom-checkbox-input:checked + #custom-checkbox::before {
+    background-color: green;
+    left: 100%;
+    transform: translateX(-100%);
+}
+
+#custom-checkbox-input {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 200px;
+        background-color: aqua;
+        transform: translateX(100%);
+        transition: transform 0.3s ease-out;
+    }
+
+    body.menu-visible .menu {
+        transform: translateX(0);
+    }
+
+    #game {
+        flex-direction: column;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .hud {
+        width: 100%;
+        margin: 10px 0;
+        height: auto;
+    }
+
+    canvas {
+        margin: 5px 0;
+        width: 100%;
+    }
+
+    footer {
+        font-size: 0.7em;
+        padding: 5px;
+    }
+
+    .modal-content {
+        width: 100%;
+        max-width: none;
+        min-height: auto;
+        padding: 10px;
+    }
+
+    #custom-checkbox {
+        width: 50px;
+        height: 25px;
+    }
+
+    #custom-checkbox::before {
+        width: 25px;
+        height: 25px;
+    }
+}
