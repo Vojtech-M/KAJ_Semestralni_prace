@@ -91,6 +91,18 @@ footer {
     height: 400px;
 }
 
+.hud button {
+    background-color: #1db309;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+}
+
+
 .hud button ~ p {
     font-size: 1.1em;
     color: yellow;
@@ -103,7 +115,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 0;
-    background-color: red;
+    background-color: rgb(87, 154, 248);
     flex-grow: 1; /* Allow the game to take the available space */
     padding: 5% 0; /* Add vertical padding to match space between header and footer */
 }

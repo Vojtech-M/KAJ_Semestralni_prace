@@ -103,19 +103,9 @@ function stopGame() {
     restartVariables();
 }
 
-
-
-
 function waveOfEnemies() {
-
-    
-            spawnEnemy();
-        
-     
-    
+    spawnEnemy();
 }
-
-
 
 const waveOfEnemiesButton = document.getElementById("nextWaveButton");
 waveOfEnemiesButton.addEventListener("click", function () {
