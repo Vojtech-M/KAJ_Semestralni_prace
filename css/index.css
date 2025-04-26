@@ -7,6 +7,7 @@ body {
     height: 100vh; /* Make the body fill the entire viewport */
 }
 
+
 *, *::before, *::after {
     box-sizing: inherit;
     font-family: inherit;
