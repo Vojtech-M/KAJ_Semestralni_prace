@@ -1,3 +1,4 @@
+// Tower.js
 export class Tower {
     constructor(x, y, tileSize, images, sharedState) {
         this.x = x;
@@ -9,9 +10,11 @@ export class Tower {
         this.shootCooldown = 2000;
 
         this.towerImage = images.towerImage;
+        this.towerType = images.towerType; 
+        this.betterTowerImage = images.betterTowerImage;
         this.targetImage = images.targetImage;
 
-        this.sharedState = sharedState; // contains enemies and money reference
+        this.sharedState = sharedState;
     }
 
     draw(ctx) {
@@ -48,7 +51,7 @@ export class Tower {
                     this.sharedState.money += 5;
                     const index = this.sharedState.enemies.indexOf(target);
                     if (index !== -1) {
-                        this.sharedState.enemies.splice(index, 1); // Remove target properly
+                        this.sharedState.enemies.splice(index, 1);
                     }
                 }
             }

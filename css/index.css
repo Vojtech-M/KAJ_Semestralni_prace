@@ -56,6 +56,10 @@ canvas {
     width: 100%;
 }
 
+.modal button:nth-child(even) {
+    background-color: #1db309;
+  }
+
 footer {
     display: flex;
     justify-content: center;
@@ -78,6 +82,7 @@ footer {
     flex-direction: column;
     color: white;
     text-align: center;
+    align-items: center;
     font-size: 1.2em;
     border: 2px solid white;
     background-color: #333;
@@ -106,8 +111,9 @@ footer {
 .menu {
     position: fixed;
     left: 100%;
-    top: 0;
-    height: 100%;
+    top: 20%;
+
+    height: 60%;
     width: 200px;
     transition: transform 0.5s ease-out;
     background-color: aqua;

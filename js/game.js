@@ -21,8 +21,10 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const towerImage = new Image();
 const targetImgae = new Image();
+const betterTowerImage = new Image();
 towerImage.src = "./assets/img/tower.png";
 targetImgae.src = "./assets/img/target.png";
+betterTowerImage.src = "./assets/img/water_tower.png";
 
 let tileMap;
 let startTime = null;
@@ -66,7 +68,7 @@ function gameLoop(timestamp) {
     if (!enemySpawnStarted) {
         enemySpawnStarted = true;
 
-        enemySpawnInterval = setInterval(spawnEnemy, 3000);
+        enemySpawnInterval = setInterval(spawnEnemy, 2000);
         setTimeout(() => {
             clearInterval(enemySpawnInterval);
             console.log("Enemy spawning stopped after 60 seconds");
@@ -105,12 +107,13 @@ function stopGame() {
 
 
 function waveOfEnemies() {
-    enemySpawnInterval = setInterval(spawnEnemy, 1000);
-        setTimeout(() => {
-            clearInterval(enemySpawnInterval);
-            console.log("Enemy spawning stopped after 60 seconds");
-        }, 3000);
-    }   
+
+    
+            spawnEnemy();
+        
+     
+    
+}
 
 
 
@@ -246,7 +249,7 @@ class TileMap {
     this.towers.push(new Tower(x, y, this.tileSize, {
         towerImage: towerImage,
         targetImage: targetImgae,
-        towerType: towerType  // <-- store the type if needed
+        towerType: towerType 
     }, sharedState));
 }
 
