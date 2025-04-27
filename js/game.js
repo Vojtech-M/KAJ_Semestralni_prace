@@ -32,6 +32,9 @@ let elapsedTime = 0;
 let lives = 10;
 let enemySpawnStarted = false;
 let enemySpawnInterval = null;
+let wave = 0;
+let wavesSpawned = false;
+        
 
 function gameLoop(timestamp) {
     if (!startTime) startTime = timestamp;
@@ -67,16 +70,47 @@ function gameLoop(timestamp) {
 
     if (!enemySpawnStarted) {
         enemySpawnStarted = true;
+        
 
-        enemySpawnInterval = setInterval(spawnEnemy, 2000);
+        waveOfEnemies(2,4);
+        console.log("Enemy spawning started");
         setTimeout(() => {
-            clearInterval(enemySpawnInterval);
-            console.log("Enemy spawning stopped after 60 seconds");
-        }, 10000);
+            waveOfEnemies(1, 4);
+            console.log("Enemy spawning started");
+        }, 6000); // 60 seconds
+        setTimeout(() => {
+            waveOfEnemies(0.8, 4);
+            console.log("Enemy spawning started");
+            wavesSpawned = true;
+        }, 12000); // 120 seconds
+
     }
-   
+    if (wavesSpawned && enemies.length === 0) {
+        alert("Congratulations! You have completed all waves.");
+        stopGame();
+        return;
+    }
+
    startGame();
 }
+
+function waveOfEnemies(spawnSpeed, length) {
+    if (enemySpawnInterval) {
+        clearInterval(enemySpawnInterval);
+        console.log("Enemy spawning stopped");
+    }
+    enemySpawnInterval = setInterval(spawnEnemy, spawnSpeed * 1000); // Spawn every spawnSpeed seconds
+    setTimeout(() => {
+        clearInterval(enemySpawnInterval);
+        console.log("Enemy spawning stopped after 60 seconds");
+    }, length * 1000); 
+}   
+
+
+
+
+
+
 
 function startGame() {
     requestAnimationFrame(gameLoop);
@@ -93,6 +127,7 @@ function restartVariables(){
     enemySpawnInterval = null;
     enemies = sharedState.enemies;
     money = sharedState.money;
+    wavesSpawned = false;
 }
 
 function stopGame() {
@@ -103,13 +138,16 @@ function stopGame() {
     restartVariables();
 }
 
-function waveOfEnemies() {
+
+
+
+function spawnSingleEnemy() {
     spawnEnemy();
 }
 
 const waveOfEnemiesButton = document.getElementById("nextWaveButton");
 waveOfEnemiesButton.addEventListener("click", function () {
-    waveOfEnemies();
+    spawnSingleEnemy();
 });
 
 // Start the game from level 

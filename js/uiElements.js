@@ -36,35 +36,38 @@ export function updateLives(lives) {
 
    // Menu logic
 
-        const menuButton = document.querySelector('.menu-button');
-        menuButton.addEventListener('click', toggleMenuState)
+const menuButton = document.querySelector('.menu-button');
+menuButton.addEventListener('click', toggleMenuState)
 
-        //namísto add a remove je toggle
-        // druhý atribut u toggle true, tak se ta řída vždycky jenom přidá, false se vždycky ubere
-        // namísto false tak aby tam bylo nějaká matematická oeprace
-        function toggleMenuState () {
-                document.body.classList.toggle('menu-visible');
+//namísto add a remove je toggle
+// druhý atribut u toggle true, tak se ta řída vždycky jenom přidá, false se vždycky ubere
+// namísto false tak aby tam bylo nějaká matematická oeprace
+function toggleMenuState () {
+        document.body.classList.toggle('menu-visible');
 
-        }
+}
 
-     
-    
-        const musicCheckbox = document.querySelector("#custom-checkbox-input");
-        const musicVolume = document.querySelector("#musicVolume");
-        let audio = new Audio("./assets/audio/swimming-swing.mp3");
-        audio.loop = true; // Make sure it loops
-        audio.volume = musicVolume.value / 100;
-        
-        musicCheckbox.addEventListener("change", function() {
-            if (musicCheckbox.checked) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        });
+const musicCheckbox = document.querySelector("#custom-checkbox-input");
+const musicVolume = document.querySelector("#musicVolume");
+let audio = new Audio("./assets/audio/swimming-swing.mp3");
+audio.loop = true; // Make sure it loops
+audio.volume = musicVolume.value / 100;
+
+musicCheckbox.addEventListener("change", function() {
+    if (musicCheckbox.checked) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+});
+
+
+// find SVG to change width.
+const volumeTriangle = document.querySelector("#volumeTriengle");
 
 // Update volume live when moving the range slider
 musicVolume.addEventListener("input", function() {
     audio.volume = musicVolume.value / 100;
+    volumeTriangle.setAttribute("width", `${musicVolume.value}px`);
+  
 });
-        

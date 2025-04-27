@@ -116,8 +116,8 @@ footer {
     justify-content: center;
     gap: 0;
     background-color: rgb(87, 154, 248);
-    flex-grow: 1; /* Allow the game to take the available space */
-    padding: 5% 0; /* Add vertical padding to match space between header and footer */
+    flex-grow: 1; 
+    padding: 5% 0;
 }
 
 .menu {
@@ -129,6 +129,13 @@ footer {
     width: 200px;
     transition: transform 0.5s ease-out;
     background-color: aqua;
+}
+
+.menu h2 + li {
+    color: rgb(1, 2, 16);
+    font-size: 1em;
+    margin: 10px 0;
+    list-style: none;
 }
 
 body.menu-visible .menu {
