@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="cs">
+
 <head>
     <title>Tower Defense Game</title>
     <meta charset="utf-8">
@@ -7,47 +8,29 @@
     <meta name="description" content="Semestrální práce KAJ">
     <meta name="keywords" content="KAJ, semestrální práce, Tower Defense Game">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" id="favicon" type="image/png" href="./assets/img/tower.png"> 
+    <link rel="icon" id="favicon" type="image/png" href="./assets/img/tower.png">
     <link rel="stylesheet" href="css/index.css">
-  
 </head>
+
 <body>
     <header>
         <h1>Tower Defense Game</h1>
     </header>
-
-<!--   <form id="form" action="index.html" method="get">
-    <label for="name">Zadejte své jméno:</label>
-    <input type="text" id="name" name="name" required>
-    <input type="submit" value="Odeslat">
-</form>
- -->
-
-
     <noscript>You need to enable JavaScript to run this app.</noscript>
-
     <nav class="menu">
+        <h2>Hudba</h2>
         <ul>
-            <h2>Hudba</h2>
-            <li>nastaveni hlasitosti</li>
-            <input id="custom-checkbox-input" type="checkbox">
-            <label id="custom-checkbox" for="custom-checkbox-input"></label>
-            <input id="musicVolume" type="range" min="1" max="100">
-            
+            <li>
+                <input id="custom-checkbox-input" type="checkbox">
+                Nastavení hlasitosti
+                <label id="custom-checkbox" for="custom-checkbox-input"></label>
+                <input id="musicVolume" type="range" min="1" max="100">
+            </li>
             <li>Druhy</li>
-            <h2>Hudba</h2>
-            <li>Treti</li>
-            <li>Ctvrty</li>
-            <li>Paty</li>
-
-
-            <svg id="volumeTriengle" height="220" width="100" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="0,220 500,220 500,0" style="fill:lime;stroke:green;stroke-width:3" />
-            </svg>
-            
-            
-           
         </ul>
+        <svg id="volumeTriengle" height="220" width="100" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="0,220 500,220 500,0" style="fill:lime;stroke:green;stroke-width:3" />
+        </svg>
     </nav>
 
     <div class="modal">
@@ -64,46 +47,49 @@
             <button id="level4" class="modal-button">
                 4. level
             </button>
-        
+
             <article>
                 <h2>O hře</h2>
-                <p>Tato hra je semestrální práce pro předmět KAJ. Hráč se snaží ubránit svou základnu před vlnami nepřátel pomocí různých typů věží.</p>
+                <p>Tato hra je semestrální práce pro předmět KAJ. Hráč se snaží ubránit svou základnu před vlnami
+                    nepřátel pomocí různých typů věží.</p>
                 <p>Hra je napsána v JavaScriptu a využívá HTML5 canvas pro vykreslování grafiky.</p>
-                <p>Hra je inspirována klasickými tower defense hrami, jako je Bloons Tower Defense nebo Kingdom Rush.</p>
-                <p>Hra obsahuje různé typy věží, které mají různé schopnosti a vlastnosti. Hráč si může vybrat, jaké věže chce postavit a kam je umístit.</p>
+                <p>Hra je inspirována klasickými tower defense hrami, jako je Bloons Tower Defense nebo Kingdom Rush.
+                </p>
+                <p>Hra obsahuje různé typy věží, které mají různé schopnosti a vlastnosti. Hráč si může vybrat, jaké
+                    věže chce postavit a kam je umístit.</p>
                 <h3 id="svatek">Načítání svátku...</h3>
 
             </article>
-        
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim ullam, officiis voluptatibus. Maxime numquam, obcaecati odio modi voluptas, dolores maiores deserunt explicabo eligendi ut debitis saepe similique pariatur ducimus quidem.</p>
         </div>
     </div>
 
     <section id="game">
 
-    <div class="hud">
-        <p id="timer">Time: 0:00</p>
+        <div class="hud">
+            <p id="timer">Time: 0:00</p>
 
-        <button id="nextWaveButton">Next wave</button>
-        <button class="menu-button">Menu</button>
+            <button id="nextWaveButton">Next wave</button>
+            <button class="menu-button">Menu</button>
 
-        <button class="modal-button" id="stopGameButton"> Levels </button>  
-        <p id="money">Money: $0</p>
-        <p id="lives">Lives: 0</p> 
+            <button class="modal-button" id="stopGameButton"> Levels </button>
+            <p id="money">Money: $0</p>
+            <p id="lives">Lives: 0</p>
 
-    </div>
+        </div>
 
-      <canvas id="gameCanvas" width="768" height="512"></canvas>
-     
-      <div class="hud">
-        <img class="towerIcon" src="./assets/img/tower.png" draggable="true" style="width: 64px; cursor: grab;" />
-        <p>Basic tower 20 $</p>
-        <img class="towerIcon" src="./assets/img/water_tower.png" draggable="true" style="width: 64px; cursor: grab;" />
-        <p>Better tower 80 $</p>
-    </div>
+        <canvas id="gameCanvas" width="768" height="512"></canvas>
+
+        <div class="hud">
+            <img class="towerIcon" src="./assets/img/tower.png" alt="tower Icon" draggable="true"
+                style="width: 64px; cursor: grab;">
+            <p>Basic tower 20 $</p>
+            <img class="towerIcon" src="./assets/img/water_tower.png" alt="Water woter Icon" draggable="true"
+                style="width: 64px; cursor: grab;">
+            <p>Better tower 80 $</p>
+        </div>
 
     </section>
-    
+
     <footer>
         <p>&copy; 2021 Vojtěch Michal</p>
         <a href="https://github.com/Vojtech-M/KAJ_Semestralni_prace"> GitHub</a>
