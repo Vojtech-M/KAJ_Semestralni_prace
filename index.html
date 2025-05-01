@@ -35,17 +35,17 @@
 
     <div class="modal">
         <div class="modal-content">
-            <button id="startButton" class="modal-button">
-                1.level
+            <button id="level1" class="modal-button">
+                level
             </button>
             <button id="level2" class="modal-button">
-                2. level
+                level
             </button>
             <button id="level3" class="modal-button">
-                3. level
+                level
             </button>
             <button id="level4" class="modal-button">
-                4. level
+                level
             </button>
 
             <article>
@@ -58,6 +58,14 @@
                 <p>Hra obsahuje různé typy věží, které mají různé schopnosti a vlastnosti. Hráč si může vybrat, jaké
                     věže chce postavit a kam je umístit.</p>
                 <h3 id="svatek">Načítání svátku...</h3>
+
+                <form id="NameDayForm">
+                    <label for="name">Zadejte své jméno:</label>
+                    <input type="text" id="name" name="name" required>
+                    <button id="submitName" class="modal-button">Odeslat</button>
+                </form>
+                <p id="greeting"></p>
+                <p id="christmas"></p>
 
             </article>
         </div>

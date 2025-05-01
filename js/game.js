@@ -72,17 +72,9 @@ function gameLoop(timestamp) {
         enemySpawnStarted = true;
         
 
-        waveOfEnemies(2,4);
-        console.log("Enemy spawning started");
-        setTimeout(() => {
-            waveOfEnemies(1, 4);
-            console.log("Enemy spawning started");
-        }, 6000); // 60 seconds
-        setTimeout(() => {
-            waveOfEnemies(0.8, 4);
-            console.log("Enemy spawning started");
-            wavesSpawned = true;
-        }, 12000); // 120 seconds
+        waveOfEnemies(1,4);
+        startWaves();
+        console.log(wave)
 
     }
     if (wavesSpawned && enemies.length === 0) {
@@ -93,8 +85,26 @@ function gameLoop(timestamp) {
 
    startGame();
 }
+function startWaves() {
+
+    waveOfEnemies(1, 4); // Spawn every 1 second for 4 seconds
+    // Wave 2 starts after 10 seconds, spawns for 8 seconds at a 3-second interval
+    setTimeout(() => {
+        waveOfEnemies(0.8, 8); // Spawn every 3 seconds for 8 seconds
+    }, 20000); // Delay for 10 seconds before starting Wave 2
+
+    // Wave 3 starts after 14 seconds, spawns for 12 seconds at a 2-second interval
+    setTimeout(() => {
+        waveOfEnemies(0.7, 12); // Spawn every 2 seconds for 12 seconds
+        wavesSpawned = true; // Mark that all waves have been spawned
+    }, 34000); // Delay for 14 seconds before starting Wave 3
+}
+
+
 
 function waveOfEnemies(spawnSpeed, length) {
+    wave++;  // Increment wave number
+    console.log(`Wave ${wave} started`); // Display wave number
     if (enemySpawnInterval) {
         clearInterval(enemySpawnInterval);
         console.log("Enemy spawning stopped");
@@ -103,6 +113,7 @@ function waveOfEnemies(spawnSpeed, length) {
     setTimeout(() => {
         clearInterval(enemySpawnInterval);
         console.log("Enemy spawning stopped after 60 seconds");
+        console.log(`Wave ${wave} ended`);
     }, length * 1000); 
 }   
 
@@ -151,8 +162,8 @@ waveOfEnemiesButton.addEventListener("click", function () {
 });
 
 // Start the game from level 
-const startButton = document.getElementById("startButton");
-startButton.addEventListener("click", function () {
+const level1 = document.getElementById("level1");
+level1.addEventListener("click", function () {
     loadMap(Level1, ctx, TileMap, function (map) {
         tileMap = map; // Update your local tileMap references
         requestAnimationFrame(gameLoop); // Start the game loop

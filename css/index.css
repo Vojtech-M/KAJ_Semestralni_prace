@@ -5,6 +5,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh; /* Make the body fill the entire viewport */
+    counter-reset: levels; /* Initialize the counter */
 }
 
 
@@ -56,9 +57,32 @@ canvas {
     width: 100%;
 }
 
-.modal button:nth-child(even) {
+
+
+.modal-content button[id^="level"] {
+    background-color: #1db309;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+   counter-increment:levels;;
+}
+
+.modal button[id^="level"]:nth-child(even) {
     background-color: #1db309;
   }
+  
+.modal-content button[id^="level"]:hover {
+    background-color: #128b02;
+}
+.modal-content button[id^="level"]::before {
+    content:counter(levels)"."
+}
+
+
 
 footer {
     display: flex;
@@ -208,6 +232,7 @@ body.modal-visible .modal-content {
 #custom-checkbox-input {
     display: none;
 }
+
 
 @media screen and (max-width: 768px) {
     .menu {

@@ -71,3 +71,28 @@ musicVolume.addEventListener("input", function() {
     volumeTriangle.setAttribute("width", `${musicVolume.value}px`);
   
 });
+
+const form = document.getElementById("NameDayForm");
+form.addEventListener("submit", (event) => {
+
+    const userName = document.getElementById("name").value;
+    form.preventDefault(); // Prevent the form from submitting
+});
+
+
+// Create today's date and Christmas date
+const today = new Date();
+const todayš = new Date('2023-12-24T00:00:00'); // Set any date you want for testing
+
+const christmas = new Date(today.getFullYear(), 11, 24); // 11 is December (months are 0-based)
+
+// Calculate the difference in days
+const diffTime = christmas - today;
+const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+// Use RelativeTimeFormat to display the relative time
+const relativeFormatter = new Intl.RelativeTimeFormat('cz', { numeric: 'auto' });
+const relativeTime = relativeFormatter.format(diffDays, 'day');
+
+
+document.getElementById('christmas').textContent = `Kdy jsou Vánoce ? ${relativeTime}`;
