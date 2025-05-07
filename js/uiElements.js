@@ -96,3 +96,5 @@ const relativeTime = relativeFormatter.format(diffDays, 'day');
 
 
 document.getElementById('christmas').textContent = `Kdy jsou Vánoce ? ${relativeTime}`;
+
+

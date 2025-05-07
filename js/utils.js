@@ -1,16 +1,14 @@
-// utils.js
-export function loadMap(levelURL, ctx, TileMapClass, onMapLoaded) {
-    fetch(levelURL)
-        .then(res => res.text())
+export function loadMap(path, ctx, TileMapClass, callback) {
+    fetch(path)
+        .then(response => response.text())
         .then(text => {
-            const tileMap = new TileMapClass(ctx, 64);
+            const tileMap = new TileMapClass(ctx, 64, { enemies: [], money: 100 }); // předání sharedState
             tileMap.loadFromText(text);
-            tileMap.draw();
-
-            // Call the callback with the new tileMap
-            onMapLoaded(tileMap);
+            callback(tileMap);
         })
-        .catch(err => console.error("Failed to load map:", err));
+        .catch(error => {
+            console.error("Error loading map:", error);
+        });
 }
 // utils.js or same file
 let elapsedTime = 0;

@@ -3,6 +3,7 @@ import { Enemy } from "./enemy.js";
 import { Tower } from "./tower.js";
 import { loadMap, calculateSeconds } from "./utils.js";
 import { toggleModalState } from "./uiElements.js";
+import { TileMap } from "./tileMap.js";
 
 
 let Level1 = "./assets/levels/map.txt"
@@ -181,7 +182,6 @@ level2.addEventListener("click", function () {
 
 
 
-
 const towerIcons = document.getElementsByClassName("towerIcon");
 
 towerIcons[0].addEventListener("dragstart", (e) => {
@@ -211,14 +211,14 @@ canvas.addEventListener("drop", (e) => {
 
     if (tileMap.map[row][col] === 0 && sharedState.money >= 10) {
         tileMap.map[row][col] = 1;
-        tileMap.addTower(row, col, data);
-        sharedState.money-= 10;
+        tileMap.addTower(row, col, "basic", towerImage, targetImgae, sharedState);
         updateMoney(sharedState.money);
         tileMap.draw();
     } else {
         console.log("Invalid tile or not enough money");
     }
 });
+
 
 
 
@@ -237,70 +237,6 @@ function spawnEnemy() {
         
     }
 }
-
-
-class TileMap {
-    constructor(ctx, tileSize) {
-        this.ctx = ctx;
-        this.tileSize = tileSize;
-        this.map = [];
-        this.towers = []; // Store tower instances
-    }
-
-    loadFromArray(array2D) {
-        this.map = array2D;
-    }
-
-    loadFromText(text) {
-        const rows = text.trim().split("\n");
-        this.map = rows.map(row => row.split("").map(Number));
-    }
-
-    draw() {
-        for (let row = 0; row < this.map.length; row++) {
-            for (let col = 0; col < this.map[row].length; col++) {
-                const tile = this.map[row][col];
-                const x = col * this.tileSize;
-                const y = row * this.tileSize;
-
-                if (tile === 2) {
-                    this.ctx.fillStyle = "black";
-                    this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
-                } else if (tile === 3) {
-                    this.ctx.fillStyle = "green";
-                    this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
-                } else if (tile === 4) {
-                    this.ctx.fillStyle = "blue";
-                    this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
-                } else {
-                    this.ctx.clearRect(x, y, this.tileSize, this.tileSize);
-                }
-            }
-        }
-
-        // Draw towers after base tiles
-        this.towers.forEach(tower => tower.draw(this.ctx));
-    }
-
-   addTower(row, col, towerType) {
-    const x = col * this.tileSize;
-    const y = row * this.tileSize;
-    this.towers.push(new Tower(x, y, this.tileSize, {
-        towerImage: towerImage,
-        targetImage: targetImgae,
-        towerType: towerType 
-    }, sharedState));
-}
-
-    removeTower(row, col) {
-        const x = col * this.tileSize;
-        const y = row * this.tileSize;
-        this.towers = this.towers.filter(t => !(t.x === x && t.y === y));
-    }
-}
-
-
-
 canvas.addEventListener("click", function(event) {
     if (!tileMap) return;
 
@@ -319,17 +255,16 @@ canvas.addEventListener("click", function(event) {
         } else if (tileMap.map[row][col] === 0) {
             if (sharedState.money >= 10) {
                 tileMap.map[row][col] = 1;
-                tileMap.addTower(row, col);
+                tileMap.addTower(row, col, "basic", towerImage, targetImgae, sharedState);
                 sharedState.money -= 10;
+                updateMoney(sharedState.money);
             }
         } else {
             console.log("Invalid tile");
         }
-        tileMap.draw();
+        tileMap.draw(); // Tohle zajistí vykreslení mapy a věží
     }
 });
-
-
 
 
 const stopGameButton = document.getElementById('stopGameButton');
@@ -337,3 +272,5 @@ stopGameButton.addEventListener("click", function () {
     stopGame();
     toggleModalState();
 });
+
+
