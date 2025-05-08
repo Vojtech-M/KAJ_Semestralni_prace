@@ -1,3 +1,4 @@
+
 export function loadMap(path, ctx, TileMapClass, callback) {
     fetch(path)
         .then(response => response.text())
@@ -26,3 +27,4 @@ export function calculateSeconds(startTime, timestamp) {
 export function resetElapsedTime() {
     elapsedTime = 0;
 }
+

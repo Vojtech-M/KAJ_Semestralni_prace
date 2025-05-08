@@ -1,10 +1,11 @@
+
+// Update HUD of game
 export function updateTimer(elapsedTime) {
     const timerElement = document.getElementById("timer");
     let seconds = elapsedTime % 60;
     let minutes = Math.floor(elapsedTime / 60);
     timerElement.textContent = `Time: ${minutes}:${String(seconds).padStart(2, "0")}`;
 }
-
 export function updateMoney(money) {
     const moneyElement = document.getElementById("money");
     moneyElement.textContent = `Money: $${money}`;
@@ -19,11 +20,7 @@ export function updateLives(lives) {
  const pageWrapper = document.querySelectorAll('.page-wrapper');
  const modal = document.querySelector('.modal');
  
-
-    // const modal = document.querySelector('.modal');
-
-
- for (let i = 0; i < modalButtons.length; i++) {
+for (let i = 0; i < modalButtons.length; i++) {
      modalButtons[i].addEventListener('click', toggleModalState)
  }
 
@@ -78,6 +75,15 @@ form.addEventListener("submit", (event) => {
     const userName = document.getElementById("name").value;
     form.preventDefault(); // Prevent the form from submitting
 });
+
+
+
+
+
+
+
+
+
 
 
 // Create today's date and Christmas date

@@ -1,5 +1,6 @@
 
 import { Tower } from "./tower.js";
+
 export class TileMap {
     constructor(ctx, tileSize) {
         this.ctx = ctx;

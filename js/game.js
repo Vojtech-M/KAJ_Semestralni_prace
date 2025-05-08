@@ -43,7 +43,6 @@ function gameLoop(timestamp) {
     elapsedTime = calculateSeconds(startTime, timestamp);
 
     tileMap?.draw();
-
     updateTimer(elapsedTime);
     updateMoney(sharedState.money);
     updateLives(lives);
@@ -86,8 +85,24 @@ function gameLoop(timestamp) {
 
    startGame();
 }
-function startWaves() {
 
+// Start the game loop
+function startGame() {
+    requestAnimationFrame(gameLoop);
+}
+
+// Stop the game loop
+function stopGame() {
+    cancelAnimationFrame(gameLoop);
+    clearInterval(enemySpawnInterval);
+    console.log("Game loop stopped");
+    toggleModalState ()
+    restartVariables();
+}
+
+
+
+function startWaves() {
     waveOfEnemies(1, 4); // Spawn every 1 second for 4 seconds
     // Wave 2 starts after 10 seconds, spawns for 8 seconds at a 3-second interval
     setTimeout(() => {
@@ -119,15 +134,6 @@ function waveOfEnemies(spawnSpeed, length) {
 }   
 
 
-
-
-
-
-
-function startGame() {
-    requestAnimationFrame(gameLoop);
-}
-
 function restartVariables(){
     sharedState.enemies = [];
     sharedState.money = 100;
@@ -140,17 +146,8 @@ function restartVariables(){
     enemies = sharedState.enemies;
     money = sharedState.money;
     wavesSpawned = false;
+    wave = 0;
 }
-
-function stopGame() {
-    cancelAnimationFrame(gameLoop);
-    clearInterval(enemySpawnInterval);
-    console.log("Game loop stopped");
-    toggleModalState ()
-    restartVariables();
-}
-
-
 
 
 function spawnSingleEnemy() {
