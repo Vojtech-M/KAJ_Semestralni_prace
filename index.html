@@ -14,7 +14,7 @@
 
 <body>
     <header>
-        <h1>Tower Defeeeeense Game</h1>
+        <h1>Tower Defense Game</h1>
     </header>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <nav class="menu">
@@ -24,8 +24,8 @@
                 <input id="musicVolume" type="range" min="1" max="100">
         <p>Hlasitost</p>
    
-        <img id="volumeIcon" src="./assets/img/icons/speaker.png" alt="volume icon" width="50px">
-        <svg id="volumeTriengle" height="220" width="100" xmlns="http://www.w3.org/2000/svg">
+        <img id="volumeIcon" src="./assets/img/icons/speaker.png" alt="volume icon">
+        <svg id="volumeTriengle" height="220" width="50" xmlns="http://www.w3.org/2000/svg">
             <polygon points="0,220 500,220 500,0" style="fill:lime;stroke:green;stroke-width:3" />
         </svg>
     </nav>
@@ -50,11 +50,10 @@
 
                 <p>Zajímavosti dnešního dne:</p>
                 <div class="hint-container">
-                    <img src="./assets/img/icons/lightbulb.png" alt="lightbulb" id="hintIcon" width="50px">
+                    <img src="./assets/img/icons/lightbulb.png" alt="lightbulb" id="hintIcon">
                     <h3 id="svatek">Načítání svátku...</h3>
                 </div>
                 <p id="christmas"></p>
-                <p id="greeting"></p>
 
             
                 <section class="level_buttons">
@@ -62,7 +61,6 @@
                         <img src="./assets/img/icons/gears.png" alt="close" id="closeModal">Nastavení
                     </button>
     
-        
                     <button id="level1" class="modal-button">
                         level
                     </button>
@@ -70,9 +68,6 @@
                         level
                     </button>
                     <button id="level3" class="modal-button">
-                        level
-                    </button>
-                    <button id="level4" class="modal-button">
                         level
                     </button>
                 </section>
@@ -88,7 +83,7 @@
 
             <button id="nextWaveButton">Spawn 1 enemy</button>
             <button class="menu-button">
-                <img src="./assets/img/icons/gears.png" alt="close" id="closeModal">Nastavení
+                <img src="./assets/img/icons/gears.png" alt="close">Nastavení
             </button>
 
             <button class="modal-button" id="stopGameButton"> Levels </button>
@@ -100,8 +95,7 @@
         <canvas id="gameCanvas" width="768" height="512"></canvas>
 
         <div class="hud">
-            <img class="towerIcon" src="./assets/img/tower.png" alt="tower Icon" draggable="true"
-                style="width: 64px; cursor: grab;">
+            <img class="towerIcon" src="./assets/img/tower.png" alt="tower Icon" draggable="true">
             <p>Basic tower 20 $</p>
         </div>
 
@@ -110,7 +104,7 @@
     <footer>
         <p>&copy; 2021 Vojtěch Michal</p>
         <a id="githubLink" href="https://github.com/Vojtech-M/KAJ_Semestralni_prace"> GitHub</a>
-        <img src="./assets/img/icons/javascript-original.svg" alt="JavaScript logo" width="32px">
+        <img id="JS_logo" src="./assets/img/icons/javascript-original.svg" alt="JavaScript logo">
     </footer>
 
     <script src="js/app.js" type="module"></script>

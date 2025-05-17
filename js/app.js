@@ -5,8 +5,6 @@ import { loadMap, calculateSeconds } from "./utils.js";
 import { toggleModalState } from "./uiElements.js";
 import { TileMap } from "./tileMap.js";
 
-
-
 let Level1 = "./assets/levels/map.txt"
 let Level2 = "./assets/levels/map2.txt"
 let Level3 = "./assets/levels/map3.txt"
@@ -42,7 +40,9 @@ function gameLoop(timestamp) {
     
     elapsedTime = calculateSeconds(startTime, timestamp);
 
-    tileMap?.draw();
+
+    // Update HUD
+    tileMap.draw();
     updateTimer(elapsedTime);
     updateMoney(sharedState.money);
     updateLives(lives);
@@ -62,6 +62,8 @@ function gameLoop(timestamp) {
     
         enemy.draw(ctx);
     }
+
+    // Check if the game is over
     if (lives <= 0) {
         alert("Game Over! You have lost all your lives.");
         stopGame();
@@ -70,24 +72,18 @@ function gameLoop(timestamp) {
 
     if (!enemySpawnStarted) {
         enemySpawnStarted = true;
-        
-
         waveOfEnemies(1,4);
         startWaves();
         console.log(wave)
 
     }
+
     if (wavesSpawned && enemies.length === 0) {
         alert("Congratulations! You have completed all waves.");
         stopGame();
         return;
     }
-
-   startGame();
-}
-
-// Start the game loop
-function startGame() {
+    // Start the Game 
     requestAnimationFrame(gameLoop);
 }
 
@@ -104,16 +100,13 @@ function stopGame() {
 
 function startWaves() {
     waveOfEnemies(1, 4); // Spawn every 1 second for 4 seconds
-    // Wave 2 starts after 10 seconds, spawns for 8 seconds at a 3-second interval
     setTimeout(() => {
         waveOfEnemies(0.8, 8); // Spawn every 3 seconds for 8 seconds
-    }, 20000); // Delay for 10 seconds before starting Wave 2
-
-    // Wave 3 starts after 14 seconds, spawns for 12 seconds at a 2-second interval
+    }, 12000);
     setTimeout(() => {
         waveOfEnemies(0.7, 12); // Spawn every 2 seconds for 12 seconds
-        wavesSpawned = true; // Mark that all waves have been spawned
-    }, 34000); // Delay for 14 seconds before starting Wave 3
+        wavesSpawned = true; 
+    }, 18000);
 }
 
 
@@ -176,6 +169,15 @@ level2.addEventListener("click", function () {
         requestAnimationFrame(gameLoop); // Start the game loop
     });
 });
+
+const level3 = document.getElementById("level3");
+level3.addEventListener("click", function () {
+    loadMap(Level3, ctx, TileMap, function (map) {
+        tileMap = map; // Update your local tileMap reference
+        requestAnimationFrame(gameLoop); // Start the game loop
+    });
+});
+
 
 
 

@@ -5,7 +5,7 @@ export class Tower {
         this.y = y;
         this.tileSize = tileSize;
         this.range = 200;
-        this.damage = 10;
+        this.damage = 15;
         this.lastShotTime = 0;
         this.shootCooldown = 2000;
 
