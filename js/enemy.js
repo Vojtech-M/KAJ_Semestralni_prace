@@ -1,4 +1,12 @@
 export class Enemy {
+    /**
+     * Represents an enemy in the game.
+     * 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} tileSize 
+     * @param {*} tileMap 
+     */
     constructor(x, y, tileSize, tileMap) {
         this.x = x;
         this.y = y;
@@ -17,6 +25,10 @@ export class Enemy {
     }
 
     update() {
+        /**
+         * Updates the enemy's position and checks for tile changes.
+         * @returns {void}
+         */
         if (!this.reachedTarget) {
             if (this.x < this.targetX) this.x += this.speed;
             if (this.x > this.targetX) this.x -= this.speed;
@@ -33,6 +45,7 @@ export class Enemy {
                 this.currentCol = this.x / this.tileSize;
             }
         } else {
+            // Check for tile changes
             const directions = [
                 { dx: 0, dy: -1 },
                 { dx: 0, dy: 1 },
@@ -52,12 +65,12 @@ export class Enemy {
                 ) {
                     const nextTile = this.tileMap.map[newRow][newCol];
 
-                    if (nextTile === 2 || nextTile === 4) {
+                    if (nextTile === 2 || nextTile === 4) { // 2 is a wall, 4 is the end tile
                         this.targetX = newCol * this.tileSize;
                         this.targetY = newRow * this.tileSize;
                         this.reachedTarget = false;
 
-                        if (nextTile === 4) {
+                        if (nextTile === 4) { // Reached the end tile
                             this.reachedEnd = true;
                         }
 
@@ -69,7 +82,13 @@ export class Enemy {
     }
 
     draw(ctx) {
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.x, this.y, this.tileSize, this.tileSize);
+        /**
+         * Draws the enemy on the canvas.
+         * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+         * @returns {void}
+         */
+        this.EnemyImage = new Image();
+        this.EnemyImage.src = "./assets/img/alien.png";
+        ctx.drawImage(this.EnemyImage, this.x, this.y, this.tileSize, this.tileSize);
     }
 }

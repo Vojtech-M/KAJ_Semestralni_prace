@@ -5,17 +5,19 @@ import { loadMap, calculateSeconds } from "./utils.js";
 import { toggleModalState } from "./uiElements.js";
 import { TileMap } from "./tileMap.js";
 
+// level paths
 let Level1 = "./assets/levels/map.txt"
 let Level2 = "./assets/levels/map2.txt"
 let Level3 = "./assets/levels/map3.txt"
 
 let sharedState = {
     enemies: [],
-    money: 100
+    money: 60,
 };
 let enemies = sharedState.enemies;
 let money = sharedState.money;
 
+// Initialize canvas and context
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const towerImage = new Image();
@@ -25,6 +27,7 @@ towerImage.src = "./assets/img/tower.png";
 targetImgae.src = "./assets/img/target.png";
 betterTowerImage.src = "./assets/img/water_tower.png";
 
+// Initialize variables
 let tileMap;
 let startTime = null;
 let elapsedTime = 0;
@@ -36,10 +39,13 @@ let wavesSpawned = false;
         
 
 function gameLoop(timestamp) {
+    /**
+     * Main game loop that updates the game state and renders the game.
+     * @param {number} timestamp - The current time in milliseconds.
+     * @returns {void}
+     */
     if (!startTime) startTime = timestamp;
-    
     elapsedTime = calculateSeconds(startTime, timestamp);
-
 
     // Update HUD
     tileMap.draw();
@@ -59,7 +65,6 @@ function gameLoop(timestamp) {
             console.log("Enemy removed at endpoint. Lives left:", lives);
             break; 
         }
-    
         enemy.draw(ctx);
     }
 
@@ -75,7 +80,6 @@ function gameLoop(timestamp) {
         waveOfEnemies(1,4);
         startWaves();
         console.log(wave)
-
     }
 
     if (wavesSpawned && enemies.length === 0) {
@@ -87,32 +91,54 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 }
 
-// Stop the game loop
 function stopGame() {
+    /*
+    * Stops the game loop and resets the game state.
+    * @returns {void}
+    */
     cancelAnimationFrame(gameLoop);
     clearInterval(enemySpawnInterval);
     console.log("Game loop stopped");
     toggleModalState ()
     restartVariables();
 }
+const stopGameButton = document.getElementById('stopGameButton');
+stopGameButton.addEventListener("click", function () {
+    stopGame();
+    toggleModalState();
+});
 
 
 
 function startWaves() {
+    /**
+     * Starts the waves of enemies.
+     * @returns {void}
+     */
     waveOfEnemies(1, 4); // Spawn every 1 second for 4 seconds
     setTimeout(() => {
-        waveOfEnemies(0.8, 8); // Spawn every 3 seconds for 8 seconds
-    }, 12000);
+        waveOfEnemies(0.8, 8); 
+    }, 10000);
     setTimeout(() => {
-        waveOfEnemies(0.7, 12); // Spawn every 2 seconds for 12 seconds
+        waveOfEnemies(0.7, 12); 
         wavesSpawned = true; 
     }, 18000);
+    setTimeout(() => {
+        waveOfEnemies(0.6, 20); 
+        wavesSpawned = true; 
+    }, 26000);
 }
 
-
-
 function waveOfEnemies(spawnSpeed, length) {
-    wave++;  // Increment wave number
+    /*
+    * Spawns a wave of enemies.
+    * @param {number} spawnSpeed - The speed of enemy spawning.
+    * @param {number} length - The length of the wave.
+    * @returns {void}
+    */
+
+    wave++;  
+
     console.log(`Wave ${wave} started`); // Display wave number
     if (enemySpawnInterval) {
         clearInterval(enemySpawnInterval);
@@ -129,7 +155,7 @@ function waveOfEnemies(spawnSpeed, length) {
 
 function restartVariables(){
     sharedState.enemies = [];
-    sharedState.money = 100;
+    sharedState.money = 60;
     tileMap = null;
     startTime = null;
     elapsedTime = 0;
@@ -160,7 +186,6 @@ level1.addEventListener("click", function () {
         requestAnimationFrame(gameLoop); // Start the game loop
     });
 });
-
 
 const level2 = document.getElementById("level2");
 level2.addEventListener("click", function () {
@@ -205,17 +230,16 @@ canvas.addEventListener("drop", (e) => {
     const col = Math.floor(x / tileMap.tileSize);
     const row = Math.floor(y / tileMap.tileSize);
 
-    if (tileMap.map[row][col] === 0 && sharedState.money >= 10) {
+    if (tileMap.map[row][col] === 0 && sharedState.money >= 20) {
         tileMap.map[row][col] = 1;
         tileMap.addTower(row, col, "basic", towerImage, targetImgae, sharedState);
         updateMoney(sharedState.money);
+        sharedState.money -= 20;
         tileMap.draw();
     } else {
         console.log("Invalid tile or not enough money");
     }
 });
-
-
 
 
 
@@ -249,24 +273,15 @@ canvas.addEventListener("click", function(event) {
             tileMap.removeTower(row, col);
             sharedState.money += 5;
         } else if (tileMap.map[row][col] === 0) {
-            if (sharedState.money >= 10) {
+            if (sharedState.money >= 20) {
                 tileMap.map[row][col] = 1;
                 tileMap.addTower(row, col, "basic", towerImage, targetImgae, sharedState);
-                sharedState.money -= 10;
+                sharedState.money -= 20;
                 updateMoney(sharedState.money);
             }
         } else {
             console.log("Invalid tile");
         }
-        tileMap.draw(); // Tohle zajistí vykreslení mapy a věží
+        tileMap.draw();// Redraw the map after adding/removing a tower
     }
 });
-
-
-const stopGameButton = document.getElementById('stopGameButton');
-stopGameButton.addEventListener("click", function () {
-    stopGame();
-    toggleModalState();
-});
-
-

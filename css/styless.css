@@ -75,6 +75,7 @@ canvas {
     cursor: pointer;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
+    --moz-transition: background-color 0.3s ease;
     counter-increment:levels;
 }
 
@@ -84,6 +85,7 @@ canvas {
   
 .modal-content button[id^="level"]:hover {
     background-color: #128b02;
+    transform: scale(1.05);
 }
 .modal-content button[id^="level"]::before {
     content:counter(levels)"."
@@ -120,7 +122,7 @@ footer {
     margin: 20px;
     padding: 10px;
     height: 90%;
-    width: 10%;
+    width: 15%;
 
 }
 
@@ -133,6 +135,12 @@ footer {
     cursor: pointer;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
+    
+    width: 180px;  /* Fixed width for uniformity */
+    height: 64px;  /* Fixed height for uniformity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -159,9 +167,11 @@ footer {
     left: 100%;
     top: 20%;
     color: white;
+    font-size: 1.2em;
     height: 60%;
-    width: 200px;
+    width: 220px;
     transition: transform 0.5s ease-out;
+    --moz-transition: transform 0.5s ease-out;
     background-color: rgb(123, 182, 250);
     z-index: 1;
 }
@@ -212,6 +222,7 @@ article .menu-button {
     position: relative;
     top: 42px;
     width: 50px;
+    transform: rotate(-10deg);
 }
 
 #hintIcon {
@@ -222,8 +233,16 @@ article .menu-button {
     width: 64px; 
     cursor: grab;
 }
+
+.towerIcon:hover {
+    transform: scale(1.1) rotate(-5deg);
+}
 #JS_logo {
     width: 32px;
+}
+#JS_logo:hover {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.3s ease;
 }
 
 body.modal-visible .page-wrapper {}
@@ -237,7 +256,7 @@ body.modal-visible .page-wrapper {}
     top: 10%;     
     left: 0;
     width: 100%;
-    height: 85%; 
+    height: 90%; 
     padding: 16px;
     box-sizing: border-box;
     backdrop-filter: blur(5px) grayscale(0.5);
@@ -336,6 +355,7 @@ form button {
   
   form button:hover {
     background-color: #128b02;
+    transform: scale(1.05);
   }
 
 
