@@ -28,6 +28,7 @@
             </li>
             <li>Druhy</li>
         </ul>
+        <img id="volumeIcon" src="./assets/img/icons/speaker.png" alt="volume icon" width="50px">
         <svg id="volumeTriengle" height="220" width="100" xmlns="http://www.w3.org/2000/svg">
             <polygon points="0,220 500,220 500,0" style="fill:lime;stroke:green;stroke-width:3" />
         </svg>
@@ -37,24 +38,35 @@
         <div class="modal-content">
 
             <article>
-                <h2>Vítej ve hře <span id="greeting"></span></h2>
-                <p>Tato hra je semestrální práce pro předmět KAJ. Hráč se snaží ubránit svou základnu před vlnami
-                    nepřátel pomocí různých typů věží.</p>
-                <p>Hra je napsána v JavaScriptu a využívá HTML5 canvas pro vykreslování grafiky.</p>
-                <h3 id="svatek">Načítání svátku...</h3>
+                <h2>Vítej ve hře<span id="greeting"></span></h2>
+
+                <p id="hint">Zde je pár tipů, jak začít:</p>
+                <ul>
+                    <li>Vyber si úroveň, kterou chceš hrát.</li>
+                    <li>Umísti věže na mapu, abys zastavil nepřátele. Kliknutím nebo Drag & Drop</li>
+                </ul>
                 <form id="nameForm">
                     <label for="name">Zadejte své jméno:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" placeholder="Martin" required>
                     <button id="submitName">Odeslat</button>
                     <p id="error" style="color: red;"></p>
                 </form>
 
-                <img src="./assets/img/icons/lightbulb.png" alt="lightbulb" id="hintIcon" width="50px">
-                <p id="greeting"></p>
+                <p>Zajímavosti dnešního dne:</p>
+                <div class="hint-container">
+                    <img src="./assets/img/icons/lightbulb.png" alt="lightbulb" id="hintIcon" width="50px">
+                    <h3 id="svatek">Načítání svátku...</h3>
+                </div>
                 <p id="christmas"></p>
+                <p id="greeting"></p>
 
-                <section class="level_buttons">
             
+                <section class="level_buttons">
+                    <button class="menu-button">
+                        <img src="./assets/img/icons/gears.png" alt="close" id="closeModal">Nastavení
+                    </button>
+    
+        
                     <button id="level1" class="modal-button">
                         level
                     </button>
@@ -79,9 +91,10 @@
             <p id="timer">Time: 0:00</p>
 
             <button id="nextWaveButton">Next wave</button>
-            <button class="menu-button">Menu</button>
+            <button class="menu-button">
+                <img src="./assets/img/icons/gears.png" alt="close" id="closeModal">Nastavení
+            </button>
 
-        
             <button class="modal-button" id="stopGameButton"> Levels </button>
             <p id="money">Money: $0</p>
             <p id="lives">Lives: 0</p>
@@ -94,9 +107,6 @@
             <img class="towerIcon" src="./assets/img/tower.png" alt="tower Icon" draggable="true"
                 style="width: 64px; cursor: grab;">
             <p>Basic tower 20 $</p>
-            <img class="towerIcon" src="./assets/img/water_tower.png" alt="Water woter Icon" draggable="true"
-                style="width: 64px; cursor: grab;">
-            <p>Better tower 80 $</p>
         </div>
 
     </section>
@@ -104,10 +114,10 @@
     <footer>
         <p>&copy; 2021 Vojtěch Michal</p>
         <a id="githubLink" href="https://github.com/Vojtech-M/KAJ_Semestralni_prace"> GitHub</a>
-        <img src="./assets/img/icons/javascript-original.svg" alt="JavaScript logo" width="50px">
+        <img src="./assets/img/icons/javascript-original.svg" alt="JavaScript logo" width="32px">
     </footer>
 
-    <script src="js/game.js" type="module"></script>
-    <script src="js/nameday.js"></script>
+    <script src="js/app.js" type="module"></script>
 </body>
+
 </html>

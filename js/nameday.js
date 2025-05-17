@@ -48,7 +48,7 @@ async function getCountryAndWeather(countryName, cityName) {
  */
 
   // Získání dnešního data ve formátu DDMM
-  function getTodayDate() {
+function getTodayDate() {
     const dnes = new Date();
     const dd = String(dnes.getDate()).padStart(2, '0');
     const mm = String(dnes.getMonth() + 1).padStart(2, '0');
@@ -56,7 +56,7 @@ async function getCountryAndWeather(countryName, cityName) {
 }
 
 // Načtení jména ze Svátky API
-async function ShowNameDay() {
+export async function ShowNameDay() {
     const date = getTodayDate();
     const url = `https://svatky.adresa.info/json?date=${date}`;
 

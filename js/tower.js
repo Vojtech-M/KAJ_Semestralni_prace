@@ -11,7 +11,7 @@ export class Tower {
 
         this.towerImage = images.towerImage;
         this.towerType = images.towerType; 
-        this.betterTowerImage = images.betterTowerImage;
+
         this.targetImage = images.targetImage;
 
         this.sharedState = sharedState;

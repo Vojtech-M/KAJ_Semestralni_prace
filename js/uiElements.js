@@ -1,4 +1,4 @@
-
+import { ShowNameDay } from "./nameDay.js";
 // Update HUD of game
 export function updateTimer(elapsedTime) {
     const timerElement = document.getElementById("timer");
@@ -32,10 +32,10 @@ for (let i = 0; i < modalButtons.length; i++) {
 
 
    // Menu logic
-
-const menuButton = document.querySelector('.menu-button');
-menuButton.addEventListener('click', toggleMenuState)
-
+   const menuButtons = document.querySelectorAll('.menu-button');
+   menuButtons.forEach(button => {
+       button.addEventListener('click', toggleMenuState);
+   });
 //namísto add a remove je toggle
 // druhý atribut u toggle true, tak se ta řída vždycky jenom přidá, false se vždycky ubere
 // namísto false tak aby tam bylo nějaká matematická oeprace
@@ -92,7 +92,8 @@ const form = document.getElementById("nameForm");
     }
 
     const greeting = document.getElementById("greeting");
-    greeting.textContent = userName;
+    greeting.textContent = `, ${userName}!`;
+    errorMessage.textContent = "";
    
 
     preventDefault(); // Prevent page reload
@@ -122,3 +123,4 @@ const relativeTime = relativeFormatter.format(diffDays, 'day');
 document.getElementById('christmas').textContent = `Kdy jsou Vánoce ? ${relativeTime}`;
 
 
+ShowNameDay();

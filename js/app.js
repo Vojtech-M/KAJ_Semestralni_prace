@@ -6,6 +6,7 @@ import { toggleModalState } from "./uiElements.js";
 import { TileMap } from "./tileMap.js";
 
 
+
 let Level1 = "./assets/levels/map.txt"
 let Level2 = "./assets/levels/map2.txt"
 let Level3 = "./assets/levels/map3.txt"
@@ -14,7 +15,6 @@ let sharedState = {
     enemies: [],
     money: 100
 };
-
 let enemies = sharedState.enemies;
 let money = sharedState.money;
 
@@ -185,9 +185,6 @@ towerIcons[0].addEventListener("dragstart", (e) => {
     e.dataTransfer.setData("text/plain", "basic");
 });
 
-towerIcons[1].addEventListener("dragstart", (e) => {
-    e.dataTransfer.setData("text/plain", "better");
-});
 canvas.addEventListener("dragover", (e) => {
     e.preventDefault(); // Required to allow drop
 });
