@@ -68,17 +68,35 @@ musicVolume.addEventListener("input", function() {
     volumeTriangle.setAttribute("width", `${musicVolume.value}px`);
   
 });
+const form = document.getElementById("nameForm");
 
-const form = document.getElementById("NameDayForm");
-form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevent page reload
 
-    const userName = document.getElementById("name").value;
-    form.preventDefault(); // Prevent the form from submitting
+    const userName = document.getElementById("name").value.trim();
+    const errorMessage = document.getElementById("error");
+
+    if (userName.length === 0) {
+      errorMessage.textContent = "Zadejte prosím své jméno.";
+      return;
+    }
+    const validPattern = /^[a-zA-ZěščřžýáíéúůňďťĚŠČŘŽÝÁÍÉÚŮŇĎŤ]+$/;
+    if (!validPattern.test(userName)) {
+        errorMessage.textContent = "Jméno může obsahovat pouze písmena.";
+      return;
+    }
+
+    if (userName.length >= 20) {
+      errorMessage.textContent = "Jméno musí mít méně než 20 znaků.";
+      return;
+    }
+
+    const greeting = document.getElementById("greeting");
+    greeting.textContent = userName;
+   
+
+    preventDefault(); // Prevent page reload
 });
-
-
-
-
 
 
 

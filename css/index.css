@@ -190,6 +190,14 @@ body.modal-visible .modal {
     visibility: hidden;
 }
 
+.level_buttons{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10px;
+    gap: 10px;
+}
+
 .modal-content {
     width: 400px;
     background-color: dodgerblue;
@@ -231,6 +239,11 @@ body.modal-visible .modal-content {
 
 #custom-checkbox-input {
     display: none;
+}
+
+#githubLink {
+    color: white;
+    font-size: 1.2em;
 }
 
 

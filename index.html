@@ -35,37 +35,39 @@
 
     <div class="modal">
         <div class="modal-content">
-            <button id="level1" class="modal-button">
-                level
-            </button>
-            <button id="level2" class="modal-button">
-                level
-            </button>
-            <button id="level3" class="modal-button">
-                level
-            </button>
-            <button id="level4" class="modal-button">
-                level
-            </button>
 
             <article>
-                <h2>O hře</h2>
+                <h2>Vítej ve hře <span id="greeting"></span></h2>
                 <p>Tato hra je semestrální práce pro předmět KAJ. Hráč se snaží ubránit svou základnu před vlnami
                     nepřátel pomocí různých typů věží.</p>
                 <p>Hra je napsána v JavaScriptu a využívá HTML5 canvas pro vykreslování grafiky.</p>
-                <p>Hra je inspirována klasickými tower defense hrami, jako je Bloons Tower Defense nebo Kingdom Rush.
-                </p>
-                <p>Hra obsahuje různé typy věží, které mají různé schopnosti a vlastnosti. Hráč si může vybrat, jaké
-                    věže chce postavit a kam je umístit.</p>
                 <h3 id="svatek">Načítání svátku...</h3>
-
-                <form id="NameDayForm">
+                <form id="nameForm">
                     <label for="name">Zadejte své jméno:</label>
                     <input type="text" id="name" name="name" required>
-                    <button id="submitName" class="modal-button">Odeslat</button>
+                    <button id="submitName">Odeslat</button>
+                    <p id="error" style="color: red;"></p>
                 </form>
+
+                <img src="./assets/img/icons/lightbulb.png" alt="lightbulb" id="hintIcon" width="50px">
                 <p id="greeting"></p>
                 <p id="christmas"></p>
+
+                <section class="level_buttons">
+            
+                    <button id="level1" class="modal-button">
+                        level
+                    </button>
+                    <button id="level2" class="modal-button">
+                        level
+                    </button>
+                    <button id="level3" class="modal-button">
+                        level
+                    </button>
+                    <button id="level4" class="modal-button">
+                        level
+                    </button>
+                </section>
 
             </article>
         </div>
@@ -79,6 +81,7 @@
             <button id="nextWaveButton">Next wave</button>
             <button class="menu-button">Menu</button>
 
+        
             <button class="modal-button" id="stopGameButton"> Levels </button>
             <p id="money">Money: $0</p>
             <p id="lives">Lives: 0</p>
@@ -100,7 +103,8 @@
 
     <footer>
         <p>&copy; 2021 Vojtěch Michal</p>
-        <a href="https://github.com/Vojtech-M/KAJ_Semestralni_prace"> GitHub</a>
+        <a id="githubLink" href="https://github.com/Vojtech-M/KAJ_Semestralni_prace"> GitHub</a>
+        <img src="./assets/img/icons/javascript-original.svg" alt="JavaScript logo" width="50px">
     </footer>
 
     <script src="js/game.js" type="module"></script>
