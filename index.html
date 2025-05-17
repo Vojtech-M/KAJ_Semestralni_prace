@@ -19,15 +19,11 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <nav class="menu">
         <h2>Hudba</h2>
-        <ul>
-            <li>
                 <input id="custom-checkbox-input" type="checkbox">
-                Nastavení hlasitosti
                 <label id="custom-checkbox" for="custom-checkbox-input"></label>
                 <input id="musicVolume" type="range" min="1" max="100">
-            </li>
-            <li>Druhy</li>
-        </ul>
+        <p>Hlasitost</p>
+   
         <img id="volumeIcon" src="./assets/img/icons/speaker.png" alt="volume icon" width="50px">
         <svg id="volumeTriengle" height="220" width="100" xmlns="http://www.w3.org/2000/svg">
             <polygon points="0,220 500,220 500,0" style="fill:lime;stroke:green;stroke-width:3" />
@@ -90,7 +86,7 @@
         <div class="hud">
             <p id="timer">Time: 0:00</p>
 
-            <button id="nextWaveButton">Next wave</button>
+            <button id="nextWaveButton">Spawn 1 enemy</button>
             <button class="menu-button">
                 <img src="./assets/img/icons/gears.png" alt="close" id="closeModal">Nastavení
             </button>

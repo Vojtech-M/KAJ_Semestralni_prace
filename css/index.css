@@ -36,6 +36,28 @@ canvas {
     margin: 10px 0;
 }
 
+#money {
+    color: #1db309;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+#money::before {
+    content: "💰";
+    margin-right: 5px;
+}
+
+
+#lives {
+    color: #d9300a;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+} 
+#lives::before {
+    content: "❤️";
+    margin-right: 5px;
+}
 
 
 
@@ -94,8 +116,10 @@ footer {
     border: 2px solid white;
     background-color: #333;
     margin: 20px;
-    width: 200px;
-    height: 400px;
+    padding: 10px;
+    height: 90%;
+    width: 10%;
+
 }
 
 .hud button {
@@ -129,6 +153,7 @@ footer {
 
 .menu {
     position: fixed;
+    padding: 20px;
     left: 100%;
     top: 20%;
     color: white;
@@ -236,7 +261,7 @@ body.modal-visible .modal {
     margin: auto;
     justify-content: center;
     align-items: center;
-    
+
     padding: 10px;
     gap: 10px;
 }

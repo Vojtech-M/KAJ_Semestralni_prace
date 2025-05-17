@@ -7,6 +7,8 @@ export class TileMap {
         this.tileSize = tileSize;
         this.map = [];
         this.towers = []; // Store tower instances
+        this.startImage = new Image();
+        this.startImage.src = "./assets/img/icons/gears.png";
     }
 
     loadFromArray(array2D) {
@@ -29,8 +31,7 @@ export class TileMap {
                     this.ctx.fillStyle = "black";
                     this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
                 } else if (tile === 3) {
-                    this.ctx.fillStyle = "green";
-                    this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
+                    this.ctx.drawImage(this.startImage, x, y, this.tileSize, this.tileSize);
                 } else if (tile === 4) {
                     this.ctx.fillStyle = "blue";
                     this.ctx.fillRect(x, y, this.tileSize, this.tileSize);
@@ -53,8 +54,6 @@ export class TileMap {
             towerType: towerType 
         }, sharedState));
     }
-    
-
 
     removeTower(row, col) {
         const x = col * this.tileSize;
