@@ -6,7 +6,8 @@ body {
     flex-direction: column;
     height: 100vh;
     --bg-dark: #222;
-    --button-green: #1c880d;
+    --button-color: #63B8FF;
+    --button-hover: #328ce6;
     counter-reset: levels; /*Counter for levels*/
 }
 
@@ -63,7 +64,7 @@ header {
 }
 
 .modal-content button[id^="level"] {
-    background-color: var(--button-green);
+    background-color: var(--button-color);
     place-items: center;
     align-self: center;
     color: white;
@@ -79,11 +80,11 @@ header {
 }
 
 .modal button[id^="level"]:nth-child(even) {
-    background-color:var(--button-green);
+    background-color:var(--button-color);
   }
   
 .modal-content button[id^="level"]:hover {
-    background-color:var(--button-green);
+    background-color:var(--button-hover);
     transform: scale(1.05);
 }
 .modal-content button[id^="level"]::before {
@@ -111,7 +112,7 @@ input[type="text"] {
     transition: border-color 0.3s ease;
 }
 input[type="text"]:focus {
-    border-color:var(--button-green);
+    border-color:var(--button-color);
     outline: none;
 }
 input[type="text"]::placeholder {
@@ -128,7 +129,7 @@ label {
     margin-bottom: 5px;
 }
 form button {
-    background-color:var(--button-green);
+    background-color:var(--button-color);
     color: white;
     border: none;
     padding: 12px;
@@ -139,7 +140,7 @@ form button {
     transition: background-color 0.3s ease;
   }
 form button:hover {
-    background-color:var(--button-green);
+    background-color:var(--button-hover);
     transform: scale(1.05);
 }
 
@@ -168,7 +169,7 @@ canvas {
 }
 
 .hud button {
-    background-color:var(--button-green);
+    background-color:var(--button-color);
     color: white;
     border: none;
     padding: 10px;
@@ -238,7 +239,7 @@ article .menu-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--button-green);
+    background-color: var(--button-color);
     color: white;
     border: 2px rgb(6, 56, 6);
     padding: 10px;
@@ -247,6 +248,11 @@ article .menu-button {
     cursor: pointer;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
+}
+
+article .menu-button:hover {
+    background-color: var(--button-hover);
+
 }
 .menu-button img {
     width: 20px;
