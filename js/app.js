@@ -187,6 +187,7 @@ level1.addEventListener("click", function () {
     });
 });
 
+
 const level2 = document.getElementById("level2");
 level2.addEventListener("click", function () {
     loadMap(Level2, ctx, TileMap, function (map) {
@@ -203,9 +204,6 @@ level3.addEventListener("click", function () {
     });
 });
 
-
-
-
 const towerIcons = document.getElementsByClassName("towerIcon");
 
 towerIcons[0].addEventListener("dragstart", (e) => {
@@ -221,11 +219,12 @@ canvas.addEventListener("drop", (e) => {
     if (!tileMap) return;
 
     const data = e.dataTransfer.getData("text/plain");
-    if (data !== "basic" && data !== "better") return;
+    if (data !== "basic" && data !== "better") return; // add types of towers
 
     const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    // Calculate the mouse position relative to the canvas -- use for small screens
+    const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (e.clientY - rect.top) * (canvas.height / rect.height);
 
     const col = Math.floor(x / tileMap.tileSize);
     const row = Math.floor(y / tileMap.tileSize);
@@ -261,10 +260,10 @@ canvas.addEventListener("click", function(event) {
     if (!tileMap) return;
 
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    const col = Math.floor(x / 64);
+    // Calculate the mouse position relative to the canvas
+    const x = (event.clientX - rect.left) * (canvas.width / rect.width);
+    const y = (event.clientY - rect.top) * (canvas.height / rect.height);
+        const col = Math.floor(x / 64);
     const row = Math.floor(y / 64);
 
     if (row >= 0 && row < tileMap.map.length && col >= 0 && col < tileMap.map[row].length) {

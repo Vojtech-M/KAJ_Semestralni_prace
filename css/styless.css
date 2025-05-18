@@ -6,6 +6,7 @@ body {
     flex-direction: column;
     height: 100vh;
     --bg-dark: #222;
+    --button-green: #1c880d;
     counter-reset: levels; /*Counter for levels*/
 }
 
@@ -13,7 +14,6 @@ body {
     box-sizing: inherit;
     font-family: inherit;
 }
-
 
 header {
     display: flex;
@@ -23,13 +23,12 @@ header {
     width: 100%;
     height: 10%;
     padding: 5px;
-background-color: var(--bg-dark);
+    background-color: var(--bg-dark);
     color: white;
     text-align: center;
     font-size: 1.2em;
     z-index: 1;
 }
-
 
 .modal {
     visibility: visible;
@@ -42,11 +41,10 @@ background-color: var(--bg-dark);
     width: 100%;
     height: 90%; 
     padding: 16px;
-    box-sizing: border-box;
     backdrop-filter: blur(5px) grayscale(0.5);
     transition: backdrop-filter 4s ease-out;
     -moz-transition: backdrop-filter 4s ease-out;
-    overflow: auto;   /* In case content is larger */
+    overflow: auto;
 }
 
 .modal-content {
@@ -62,12 +60,10 @@ background-color: var(--bg-dark);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
 }
 
-
 .modal-content button[id^="level"] {
-    background-color: #1db309;
+    background-color: var(--button-green);
     place-items: center;
     align-self: center;
     color: white;
@@ -83,17 +79,16 @@ background-color: var(--bg-dark);
 }
 
 .modal button[id^="level"]:nth-child(even) {
-    background-color: #1db309;
+    background-color:var(--button-green);
   }
   
 .modal-content button[id^="level"]:hover {
-    background-color: #128b02;
+    background-color:var(--button-green);
     transform: scale(1.05);
 }
 .modal-content button[id^="level"]::before {
     content:counter(levels)"."
 }
-
 
 
 form {
@@ -103,7 +98,7 @@ form {
     padding: 15px 20px;
     margin: 0 auto;
     max-width: 400px;
-    background: rgba(0, 0, 0, 0.15); /* subtle transparent background */
+    background: rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
@@ -113,31 +108,27 @@ input[type="text"] {
     border-radius: 4px;
     font-size: 1em;
     width: 100%;
-    box-sizing: border-box; /* include padding and border in element's total width */
     transition: border-color 0.3s ease;
 }
 input[type="text"]:focus {
-    border-color: #1db309;
-    outline: none; /* remove default outline */
+    border-color:var(--button-green);
+    outline: none;
 }
 input[type="text"]::placeholder {
-    color: #aaa; /* Placeholder text color */
-    font-style: italic; /* Italicize placeholder text */
-}
-input[type="text"]:focus::placeholder {
-    color: transparent; /* Hide placeholder text on focus */
+    color: #aaa;
+    font-style: italic; 
 }
 input[type="text"]:not(:placeholder-shown) {
-    color: #0c0233; /* Change text color when input is not empty */
+    color: #0c0233
 }
 label {
     font-size: 1.2em;
-    color: #fff; /* Default label color */
+    color: #fff;
     transition: color 0.3s ease;
-    margin-bottom: 5px; /* Space between label and input */
+    margin-bottom: 5px;
 }
 form button {
-    background-color: #1db309;
+    background-color:var(--button-green);
     color: white;
     border: none;
     padding: 12px;
@@ -148,7 +139,7 @@ form button {
     transition: background-color 0.3s ease;
   }
 form button:hover {
-    background-color: #128b02;
+    background-color:var(--button-green);
     transform: scale(1.05);
 }
 
@@ -177,7 +168,7 @@ canvas {
 }
 
 .hud button {
-    background-color: #1db309;
+    background-color:var(--button-green);
     color: white;
     border: none;
     padding: 10px;
@@ -185,8 +176,7 @@ canvas {
     cursor: pointer;
     font-size: 1.2em;
     transition: background-color 0.3s ease;
-    
-    width: 180px;
+    width: 100%;
     height: 64px;  
     display: flex;
     justify-content: center;
@@ -233,7 +223,6 @@ canvas {
     cursor: pointer;
 }
 
-
 .menu h2 + li {
     color: rgb(255, 255, 255);
     font-size: 1em;
@@ -249,7 +238,7 @@ article .menu-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1db309;
+    background-color: var(--button-green);
     color: white;
     border: 2px rgb(6, 56, 6);
     padding: 10px;
@@ -264,8 +253,6 @@ article .menu-button {
     height: 20px;
     margin-right: 10px;
 }
-
-
 
 #volumeIcon {
     position: relative;
@@ -286,13 +273,6 @@ article .menu-button {
 .towerIcon:hover {
     transform: scale(1.1) rotate(-5deg);
 }
-#JS_logo {
-    width: 32px;
-}
-#JS_logo:hover {
-    transform: scale(1.2) rotate(5deg);
-    transition: transform 0.3s ease;
-}
 
 body.modal-visible .modal {
     visibility: hidden;
@@ -304,7 +284,6 @@ body.modal-visible .modal {
     margin: auto;
     justify-content: center;
     align-items: center;
-
     padding: 10px;
     gap: 10px;
 }
@@ -395,9 +374,15 @@ footer {
     color: white;
     font-size: 1.2em;
 }
+#JS_logo {
+    width: 32px;
+}
+#JS_logo:hover {
+    transform: scale(1.2) rotate(5deg);
+    transition: transform 0.3s ease;
+}
 
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
 
     #game {
         flex-direction: column;

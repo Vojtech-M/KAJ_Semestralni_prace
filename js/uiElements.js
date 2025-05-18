@@ -114,7 +114,7 @@ const form = document.getElementById("nameForm");
 const today = new Date();
 const todayš = new Date('2023-12-24T00:00:00'); // Set any date you want for testing
 
-const christmas = new Date(today.getFullYear(), 11, 24); // 11 is December (months are 0-based)
+const christmas = new Date(today.getFullYear(), 11, 24);
 
 // Calculate the difference in days
 const diffTime = christmas - today;
