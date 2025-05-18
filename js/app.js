@@ -101,7 +101,7 @@ function stopGame() {
     clearInterval(enemySpawnInterval);
     console.log("Game loop stopped");
 
-      waveTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+    waveTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
     waveTimeouts = [];
     toggleModalState ()
     restartVariables();
