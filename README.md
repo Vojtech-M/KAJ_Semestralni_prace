@@ -1,6 +1,8 @@
 # Cíl projektu  
 Cílem projektu je vytvořit single-page webovou aplikaci typu tower defense, kde hráč staví obranné věže proti vlnám nepřátel. Hra je inspirovaná tituly jako **Bloons TD Battles** nebo **Desktop Tower Defense**.
 
+Projekt je dostupný na této adrese: [https://vojtech-m-kaj.netlify.app/](https://vojtech-m-kaj.netlify.app/)
+
 ## Popis funkčnosti  
 
 ### Jak se hraje 🕹️  
