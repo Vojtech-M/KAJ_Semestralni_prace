@@ -16,6 +16,7 @@ let sharedState = {
 };
 let enemies = sharedState.enemies;
 let money = sharedState.money;
+let waveTimeouts = [];
 
 // Initialize canvas and context
 const canvas = document.getElementById("gameCanvas");
@@ -99,6 +100,9 @@ function stopGame() {
     cancelAnimationFrame(gameLoop);
     clearInterval(enemySpawnInterval);
     console.log("Game loop stopped");
+
+      waveTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+    waveTimeouts = [];
     toggleModalState ()
     restartVariables();
 }
@@ -116,17 +120,19 @@ function startWaves() {
      * @returns {void}
      */
     waveOfEnemies(1, 4); // Spawn every 1 second for 4 seconds
-    setTimeout(() => {
-        waveOfEnemies(0.8, 8); 
-    }, 10000);
-    setTimeout(() => {
+   waveTimeouts.push(setTimeout(() => {
+    waveOfEnemies(0.8, 8); 
+    }, 10000));
+
+    waveTimeouts.push(setTimeout(() => {
         waveOfEnemies(0.7, 12); 
         wavesSpawned = true; 
-    }, 18000);
-    setTimeout(() => {
+    }, 18000));
+
+    waveTimeouts.push(setTimeout(() => {
         waveOfEnemies(0.6, 20); 
         wavesSpawned = true; 
-    }, 26000);
+    }, 26000));
 }
 
 function waveOfEnemies(spawnSpeed, length) {
@@ -165,6 +171,8 @@ function restartVariables(){
     enemies = sharedState.enemies;
     money = sharedState.money;
     wavesSpawned = false;
+    waveTimeouts.forEach(timeoutId => clearTimeout(timeoutId));
+    waveTimeouts = [];
     wave = 0;
 }
 
@@ -181,15 +189,16 @@ waveOfEnemiesButton.addEventListener("click", function () {
 // Start the game from level 
 const level1 = document.getElementById("level1");
 level1.addEventListener("click", function () {
+    restartVariables();
     loadMap(Level1, ctx, TileMap, function (map) {
-        tileMap = map; // Update your local tileMap references
-        requestAnimationFrame(gameLoop); // Start the game loop
+        tileMap = map;
+        requestAnimationFrame(gameLoop);
     });
 });
 
-
 const level2 = document.getElementById("level2");
 level2.addEventListener("click", function () {
+     restartVariables();
     loadMap(Level2, ctx, TileMap, function (map) {
         tileMap = map; // Update your local tileMap reference
         requestAnimationFrame(gameLoop); // Start the game loop
@@ -198,6 +207,7 @@ level2.addEventListener("click", function () {
 
 const level3 = document.getElementById("level3");
 level3.addEventListener("click", function () {
+     restartVariables();
     loadMap(Level3, ctx, TileMap, function (map) {
         tileMap = map; // Update your local tileMap reference
         requestAnimationFrame(gameLoop); // Start the game loop
