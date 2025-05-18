@@ -187,10 +187,13 @@ canvas {
 
 /* color of money */
 .hud button ~ p {
-    font-size: 1.1em;
     color: rgb(9, 192, 73);
     text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
 }
+
 
 #game {
     display: flex;
@@ -333,11 +336,14 @@ body.modal-visible .modal-content {
     transform: translateX(-100%);
 }
 
-#money {
-        font-size: 1.5em;
+#timer {
+    color: #e6db13;
+    font-size: 1.5em;
     font-weight: bold;
     text-align: center;
 }
+
+
 #money::before {
     content: "💰";
     margin-right: 5px;
