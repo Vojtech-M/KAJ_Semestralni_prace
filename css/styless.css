@@ -185,9 +185,10 @@ canvas {
 }
 
 
+/* color of money */
 .hud button ~ p {
     font-size: 1.1em;
-    color: yellow;
+    color: rgb(9, 192, 73);
     text-align: center;
 }
 
@@ -333,8 +334,7 @@ body.modal-visible .modal-content {
 }
 
 #money {
-    color: #1db309;
-    font-size: 1.5em;
+        font-size: 1.5em;
     font-weight: bold;
     text-align: center;
 }
